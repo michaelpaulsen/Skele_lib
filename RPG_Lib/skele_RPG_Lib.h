@@ -1,3 +1,4 @@
+#pragma once
 #define DEBUG
 #include <string>
 namespace Skele_lib {
