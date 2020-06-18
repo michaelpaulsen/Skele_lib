@@ -1,3 +1,4 @@
+#define DEBUG
 #include <string>
 namespace Skele_lib {
 	namespace RPG {
