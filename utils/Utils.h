@@ -1,4 +1,6 @@
 #pragma once
+#include <Windows.h>
+#include <winuser.h>
 namespace Skele_lib {
 	namespace Utils {
 		bool GetKeyDown(int key) {///returns if the key 'key' is pressed 
