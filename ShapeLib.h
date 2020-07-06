@@ -6,6 +6,23 @@ namespace Skele_lib {
             virtual  double perimeter() = 0;
             virtual  double area() = 0;
         };
+        struct Rect : public Shape {
+            double w, h;
+            Rect(double _w, double _h) {
+                this->w = _w;
+                this->h = _h; 
+            }
+            Rect(double _w) {
+                this->w = _w;
+                this->h = _w; 
+            }
+            double perimeter() override {
+                return 2 * this->h + 2 * this->w;
+            }
+            double area() override {
+                return this->h * this->w;
+            }
+        };
         void pythapythagoreanTriples(int opnum){
             /**prints all of the Pythapythagorean Triples in z <= opnum to the file pythapythagoreanTriples.cvs*/
             std::ofstream PyFi;
