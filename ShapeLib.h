@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <fstream>
+#include "math.h"
 namespace Skele_lib {
 	namespace Shapes {
         struct Shape {
@@ -23,6 +24,19 @@ namespace Skele_lib {
             }
             double area() override {
                 return this->h * this->w;
+            }
+        };
+        struct Circle : public Shape{
+            double radius, daimeter;
+            Circle(double r) {
+                this->radius = r; 
+                this->daimeter = 2*r; 
+            }
+            double perimeter() {
+                return this->daimeter * Skele_lib::Math::PI;
+            }
+            double area() {
+                return Skele_lib::Math::PI * (this->radius * this->radius); 
             }
         };
         void pythapythagoreanTriples(int opnum){
