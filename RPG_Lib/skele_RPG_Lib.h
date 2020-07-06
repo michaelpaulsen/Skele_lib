@@ -19,7 +19,6 @@ namespace Skele_lib {
 			Item() {
 			};
 			std::string name;
-			Player player;
 			int range = -1;
 			int type;
 			virtual bool use() = 0; // override this to implement a use 
