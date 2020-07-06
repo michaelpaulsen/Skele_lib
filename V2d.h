@@ -6,13 +6,13 @@
 namespace Skele_lib{
 	namespace Math{
 	
-		class V2d
+		template<typename t> class V2d
 		{
 		private:
-			float x;
-			float y;
+			t x;
+			t y;
 		public:
-			V2d(float x, float y) {
+			V2d(t x, t y) {
 				this->x = x;
 				this->y = y;
 			}
@@ -23,16 +23,16 @@ namespace Skele_lib{
 			float getAngle() {
 				return std::atan(this->y / this->x);
 			}
-			float getX() {
+			t getX() {
 				return this->x;
 			}
-			void setX(int sx) {
+			void setX(t sx) {
 				this->x = sx;
 			}
-			float getY() {
+			t getY() {
 				return this->y;
 			}
-			void setY(float sy) {
+			void setY(t sy) {
 				this->y = sy;
 			}
 			float getAngle(bool deg = false) {
@@ -45,42 +45,42 @@ namespace Skele_lib{
 					return rad; 
 				}
 			}
-			V2d delta(V2d o) {
+			V2d<t> delta(V2d o) {
 				V2d temp;
 				temp = V2d(abs(this->x - o.x), abs(this->y - o.y));
 				return temp;
 			}
-			V2d operator+(V2d o) {
+			V2d<t> operator+(V2d o) {
 				V2d temp = V2d(0, 0);
 				temp.x = this->x + o.x;
 				temp.y = this->y + o.y;
 				return temp;
 			}
-			V2d operator-(V2d o) {
+			V2d<t> operator-(V2d o) {
 				V2d temp = V2d(0, 0);
 				temp.x = this->x - o.x;
 				temp.y = this->y - o.y;
 				return temp;
 			}
-			V2d operator*(V2d o) {
+			V2d<t> operator*(V2d o) {
 				V2d temp = V2d(0, 0);
 				temp.x = this->x * o.x;
 				temp.y = this->y * o.y;
 				return temp;
 			}
-			V2d operator/(V2d o) {
+			V2d<t> operator/(V2d o) {
 				V2d temp = V2d(0, 0);
 				temp.x = this->x / o.x;
 				temp.y = this->y / o.y;
 				return temp;
 			}	
-			V2d operator*(float o) {
+			V2d<t> operator*(float o) {
 				V2d temp = V2d(0, 0);
 				temp.x = this->x * o;
 				temp.y = this->y * o;
 				return temp;
 			}
-			V2d operator/(float o) {
+			V2d<t> operator/(float o) {
 				V2d temp = V2d(0, 0);
 				temp.x = this->x / o;
 				temp.y = this->y / o;
@@ -101,5 +101,8 @@ namespace Skele_lib{
 				return this->x == o && this->y == o;
 			}
 		};
+		typedef V2d<int> V2dI;
+		typedef V2d<float> V2dF;
+		typedef V2d<double> V2dD;
 	}
 }
