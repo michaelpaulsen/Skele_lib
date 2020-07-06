@@ -39,7 +39,7 @@ namespace Skele_lib{
 				std::printf("%f : %f", x, y);
 				double rad = std::atan(this->y / this->x);
 				if (deg) {
-					return rad * 180 / Skele_lib::Math::PI;
+					return rad * Skele_lib::Math::RAD_TO_DEG;
 				}
 				else {
 					return rad; 
