@@ -2,6 +2,10 @@
 #include <fstream>
 namespace Skele_lib {
 	namespace Shapes {
+        struct Shape {
+            virtual  double perimeter() = 0;
+            virtual  double area() = 0;
+        };
         void pythapythagoreanTriples(int opnum){
             /**prints all of the Pythapythagorean Triples in z <= opnum to the file pythapythagoreanTriples.cvs*/
             std::ofstream PyFi;
