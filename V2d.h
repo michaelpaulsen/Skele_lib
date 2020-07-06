@@ -9,10 +9,10 @@ namespace Skele_lib{
 		class V2d
 		{
 		private:
-			int x;
-			int y;
+			float x;
+			float y;
 		public:
-			V2d(int x, int y) {
+			V2d(float x, float y) {
 				this->x = x;
 				this->y = y;
 			}
