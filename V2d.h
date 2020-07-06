@@ -35,12 +35,14 @@ namespace Skele_lib{
 			void setY(float sy) {
 				this->y = sy;
 			}
-
-			float getAngle(bool deg) {
+			float getAngle(bool deg = false) {
 				std::printf("%f : %f", x, y);
 				double rad = std::atan(this->y / this->x);
 				if (deg) {
 					return rad * 180 / Skele_lib::Math::PI;
+				}
+				else {
+					return rad; 
 				}
 			}
 			V2d delta(V2d o) {
