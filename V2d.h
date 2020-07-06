@@ -79,6 +79,10 @@ namespace Skele_lib{
 				temp.x = this->x = o.x;
 				temp.y = this->y = o.y;
 				return temp;
+			void operator=(V2d o) {
+				this->x = o.x;
+				this->y = o.y;
+			}	
 			}	
 			bool operator== (V2d o) {
 				return this->x == o.x && this->y == o.y;
