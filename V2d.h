@@ -73,19 +73,32 @@ namespace Skele_lib{
 				temp.x = this->x / o.x;
 				temp.y = this->y / o.y;
 				return temp;
-			}
-			V2d operator=(V2d o) {
+			}	
+			V2d operator*(float o) {
 				V2d temp = V2d(0, 0);
-				temp.x = this->x = o.x;
-				temp.y = this->y = o.y;
+				temp.x = this->x * o;
+				temp.y = this->y * o;
 				return temp;
+			}
+			V2d operator/(float o) {
+				V2d temp = V2d(0, 0);
+				temp.x = this->x / o;
+				temp.y = this->y / o;
+				return temp;
+			}
 			void operator=(V2d o) {
 				this->x = o.x;
 				this->y = o.y;
 			}	
+			void operator=(float o) {
+				this->x = o;
+				this->y = o;
 			}	
 			bool operator== (V2d o) {
 				return this->x == o.x && this->y == o.y;
+			}
+			bool operator== (float o) {
+				return this->x == o && this->y == o;
 			}
 		};
 	}
