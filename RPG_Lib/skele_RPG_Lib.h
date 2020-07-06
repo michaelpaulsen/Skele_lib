@@ -1,5 +1,4 @@
 #pragma once
-#define DEBUG
 #include <string>
 namespace Skele_lib {
 	namespace RPG {
@@ -77,12 +76,3 @@ namespace Skele_lib {
 
 	}
 }
-#ifdef DEBUG
-
-#include <iostream>
-
-int main()
-{
-    std::cout << "Hello World!\n";
-}
-#endif // DEBUG
