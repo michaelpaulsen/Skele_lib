@@ -20,16 +20,7 @@ namespace Skele_lib{
 				this->x = 0;
 				this->y = 0;
 			}
-			void set(int x, int y) {
-				this->x = x;
-				this->y = y;
-			}
 			float getAngle() {
-				//std::printf("%f : %f", x, y);
-				/*	if (this->x == this->y) {
-						return 45.0f;
-					}*/
-
 				return std::atan(this->y / this->x);
 			}
 			float getX() {
@@ -54,7 +45,7 @@ namespace Skele_lib{
 			}
 			V2d delta(V2d o) {
 				V2d temp;
-				temp.set(this->x - o.x, this->y - o.y); 
+				temp = V2d(abs(this->x - o.x), abs(this->y - o.y));
 				return temp;
 			}
 			V2d operator+(V2d o) {
