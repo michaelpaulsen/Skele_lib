@@ -14,6 +14,7 @@ namespace Skele_lib {
 				data = static_cast<t*>(malloc(sizeof(t) * length));
 				assert(this->data != nullptr);
 				this->length = length;
+				this->items = 0;
 			}
 			~Array()
 			{
@@ -25,6 +26,9 @@ namespace Skele_lib {
 					this->length *= 2;
 					this->data = static_cast<t*>(realloc(this->data, sizeof(t) * length));
 					assert(this->data != nullptr);
+					for (int x = this->items; x < this->length; x++) {
+						this->data[x] = NULL; 
+					}
 				}
 				this->items++;
 				this->data[this->items] = newLast;
@@ -35,7 +39,9 @@ namespace Skele_lib {
 				return temp;
 			}
 			t operator [](int i) {
-				return this->data[i];
+				if (i <= this->items) {
+					return this->data[i+1];
+				}
 			}
 		};
 	}
