@@ -8,8 +8,8 @@ namespace Skele_lib {
 		template<typename t> class Array {
 			t* data;
 			int items;
-		public:
 			int length;
+		public:
 			Array(int length) {
 				data = static_cast<t*>(malloc(sizeof(t) * length));
 				assert(this->data != nullptr);
@@ -20,7 +20,9 @@ namespace Skele_lib {
 			{
 				free(this->data);
 			}
-
+			int Length() {
+				return this->items;
+			}
 			void Push(t newLast) {
 				if (this->items == this->length) {
 					this->length *= 2;
