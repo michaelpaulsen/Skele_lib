@@ -42,8 +42,11 @@ namespace Skele_lib {
 				return temp;
 			}
 			t operator [](int i) {
-				if (i <= this->items) {
+				if (i <= this->items-1) {
 					return this->data[i+1];
+				}
+				else {
+					return NULL; 
 				}
 			}
 		};
