@@ -32,8 +32,8 @@ namespace Skele_lib {
 						this->data[x] = NULL; 
 					}
 				}
-				this->items++;
 				this->data[this->items] = newLast;
+				this->items++;
 			}
 			t Pop() {
 				
