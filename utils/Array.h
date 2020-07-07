@@ -1,5 +1,7 @@
 #pragma once
 #include <cassert>
+#include <exception>
+#include <iostream>
 namespace Skele_lib {
 	namespace Utils {
 		/*
@@ -11,7 +13,7 @@ namespace Skele_lib {
 			int length;
 		public:
 			Array(int length) {
-				data = static_cast<t*>(malloc(sizeof(t) * length));
+				data = static_cast<t*>(calloc(0,sizeof(t) * length));
 				assert(this->data != nullptr);
 				this->length = length;
 				this->items = 0;
