@@ -3,6 +3,10 @@
 #include <winuser.h>
 namespace Skele_lib {
 	namespace Utils {
+		char getChar() {
+			/// read a single character from the console without echoing the character
+			return _getch();
+		}
 		bool GetKeyDown(int key) {///returns if the key 'key' is pressed 
 			return GetAsyncKeyState(key) >> 15;
 		}
