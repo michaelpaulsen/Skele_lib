@@ -36,10 +36,8 @@ namespace Skele_lib {
 				this->items++;
 			}
 			t Pop() {
-				
 				this->items--;
-				t temp = this->operator[](this->items);
-				return temp;
+				return this->data[this->items];
 			}
 			t operator [](int i) {
 				if (i <= this->items-1) {
