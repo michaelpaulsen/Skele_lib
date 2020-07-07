@@ -101,6 +101,12 @@ namespace Skele_lib{
 				return this->x == o && this->y == o;
 			}
 		};
+		V2d<int> getPosFromIndex(int i, int sw, int sh ) {
+			V2d<int> temp = V2d<int>(0, 0);
+			temp.setY(floor(i / sw));
+			temp.setX(i % sh);
+			return temp;
+		}
 		typedef V2d<int> V2dI;
 		typedef V2d<float> V2dF;
 		typedef V2d<double> V2dD;
