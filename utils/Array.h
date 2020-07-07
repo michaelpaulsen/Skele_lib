@@ -42,12 +42,12 @@ namespace Skele_lib {
 				return this->data[this->items];
 			}
 			t operator [](int i) {
-				if (i <= this->items-1) {
-					return this->data[i+1];
+				if (i >= 0 && i <= this->items - 1) {
+					return this->data[i + 1];//index 0 is ptn to the array so always at least return index 1; 
 				}
-				else {
-					return NULL; 
-				}
+				std::cerr << "ARRAY_INDEX_OUT_OF_BOUNDS ERROR"; 
+				return NULL;
+				
 			}
 		};
 	}
