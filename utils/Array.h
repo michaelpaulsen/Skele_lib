@@ -36,8 +36,9 @@ namespace Skele_lib {
 				this->data[this->items] = newLast;
 			}
 			t Pop() {
-				t temp = data[this->items];
+				
 				this->items--;
+				t temp = this->operator[](this->items);
 				return temp;
 			}
 			t operator [](int i) {
