@@ -13,7 +13,7 @@ namespace Skele_lib {
 			int length;
 		public:
 			Array(int length) {
-				data = static_cast<t*>(calloc(0,sizeof(t) * length));
+				data = static_cast<t*>(malloc(sizeof(t) * length));
 				assert(this->data != nullptr);
 				this->length = length;
 				this->items = 0;
@@ -47,7 +47,6 @@ namespace Skele_lib {
 				}
 				std::cerr << "ARRAY_INDEX_OUT_OF_BOUNDS ERROR"; 
 				return NULL;
-				
 			}
 		};
 	}
