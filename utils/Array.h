@@ -11,6 +11,16 @@ namespace Skele_lib {
 			t* data;
 			int items;
 			int length;
+			void resize(int m, int op) {
+				if (op == 1) {
+					this->length *= m;
+				} 
+				if (op == 2) {
+					this->length /= m;
+				}
+				this->data = static_cast<t*>(realloc(this->data, sizeof(t) * length));
+				assert(this->data != nullptr);
+			}
 		public:
 			Array(int length) {
 				data = static_cast<t*>(malloc(sizeof(t) * length));
@@ -27,9 +37,7 @@ namespace Skele_lib {
 			}
 			void Push(t newLast) {
 				if (this->items == this->length) {
-					this->length *= 2;
-					this->data = static_cast<t*>(realloc(this->data, sizeof(t) * length));
-					assert(this->data != nullptr);
+					this->resize(2, 1);
 					for (int x = this->items; x < this->length; x++) {
 						this->data[x] = NULL; 
 					}
@@ -39,6 +47,9 @@ namespace Skele_lib {
 			}
 			t Pop() {
 				this->items--;
+				if (this->items < this->length / 2) {
+					this->resize(2, 2);
+				}
 				return this->data[this->items];
 			}
 			t operator [](int i) {
