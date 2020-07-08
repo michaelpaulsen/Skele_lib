@@ -49,5 +49,9 @@ namespace Skele_lib {
 				return NULL;
 			}
 		};
+		typedef Array<int>    ArrayI;
+		typedef Array<float>  ArrayF;
+		typedef Array<double> ArrayD;
+		typedef Array<char>   ArrayC;
 	}
 }
