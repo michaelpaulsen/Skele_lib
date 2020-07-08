@@ -4,10 +4,11 @@
 #include <iostream>
 namespace Skele_lib {
 	namespace Utils {
-		/*
-		*	the class Array is a c++ Javascript like array implementation
-		*/
+		
 		template<typename t> class Array {
+/*
+*	the class Array is a c++ Javascript like array implementation
+*/
 			t* data;
 			int items;
 			int length;
