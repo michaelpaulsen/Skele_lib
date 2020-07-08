@@ -1,5 +1,6 @@
 
 #pragma once
+#define vector2d
 #include <iostream>
 #include <cmath>
 #include "math.h"
@@ -107,8 +108,5 @@ namespace Skele_lib{
 			temp.setX(i % sh);
 			return temp;
 		}
-		typedef V2d<int> V2dI;
-		typedef V2d<float> V2dF;
-		typedef V2d<double> V2dD;
 	}
 }

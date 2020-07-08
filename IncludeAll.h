@@ -7,3 +7,4 @@
 #include "../Skele_lib/RPG_Lib/skele_RPG_Lib.h"
 #include "../Skele_lib/utils/Array.h"
 #include "../Skele_lib/utils/Utils.h"
+#include "../Skele_lib/typedefs.h"
