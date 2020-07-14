@@ -18,6 +18,15 @@ namespace Skele_lib {
 		char longToChar(long x){ /// returns the LSD of the passed in int as a char
 			return (x % 10) + 48;
 		}
+		int CharToInt(char c) {
+			/*
+			* this works because the chars are stored as numbers so you can cast (convert) from char to int
+			* this also means that you can compare and to math on chars
+			*/
+			if (c >= '0' && c <= '9') {
+				return (c - '0'); 
+			}
+		}
 		bool isPrintfSafe(const char* s) {
 			int i = 0; 
 			while(s[i] != '\0') {
