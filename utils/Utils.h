@@ -26,7 +26,7 @@ namespace Skele_lib {
 			* this works because the chars are stored as numbers so you can cast (convert) from char to int
 			* this also means that you can compare and to math on chars
 			*/
-			if (c >= '0' && c <= '9') {
+			if (isIntegral(c)){
 				return (c - '0'); 
 			}
 		}
