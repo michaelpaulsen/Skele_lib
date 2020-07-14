@@ -2,7 +2,7 @@
 #include <Windows.h>
 #include <winuser.h>
 #include <conio.h>
-
+#include <cmath>
 namespace Skele_lib {
 	namespace Utils {
 		char getChar() {
@@ -73,6 +73,19 @@ namespace Skele_lib {
 				i++;
 			}
 			return true; 
+		}
+		char* intToString(int t) {
+			int pow = 10;
+			int d = (log(t) / log(10)) + 1;
+			char* s = static_cast<char*>(calloc(d+1, sizeof(char)));
+			for (int x = 0; x < d; x++) {
+				s[x] = '0'; 
+			}
+			for (int x = d-1; x > -1; x--) {
+				s[x] = intToChar((t%pow)/(pow/10)); 
+				pow *= 10; 
+			}
+			return s; 
 		}
 	}
 }
