@@ -61,6 +61,16 @@ namespace Skele_lib {
 				std::cerr << "ARRAY_INDEX_OUT_OF_BOUNDS ERROR"; 
 				return NULL;
 			}
+			Array<t> operator+(Array<t> o ){ /// append operator 
+				Array<t> temp = Array<t>((this->Length() + o.Length())-2); 
+				for (int i = 0; i < this->Length(); i++) {
+					temp.Push(this->operator[](i));
+				}
+				for (int i = 0; i < o.Length(); i++) {
+					temp.Push(o[i]);
+				}
+				return temp; 
+			}
 		};
 	}
 }
