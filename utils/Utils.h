@@ -13,10 +13,10 @@ namespace Skele_lib {
 			return GetAsyncKeyState(key) >> 15;
 		}
 		char intToChar(int x){ /// returns the LSD of the passed in int as a char
-			return (x%10)+48;
+			return (x % 10) + 48;
 		}
 		char longToChar(long x){ /// returns the LSD of the passed in int as a char
-			return (x%10)+48;
+			return (x % 10) + 48;
 		}
 	}
 }
