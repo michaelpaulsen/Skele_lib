@@ -30,6 +30,27 @@ namespace Skele_lib {
 				return (c - '0'); 
 			}
 		}
+		int stringToInt(const char* n) {
+			bool isInt = true;
+			int ret = 0; 
+			int pow = 1;
+			int x   = sizeof(n)/sizeof(char);
+			while (x >= 0) {
+				isInt = isIntegral(n[x]);
+				if (isInt) {
+					ret += (CharToInt(n[x]) * pow); 
+					pow *= 10; 
+				}
+				else {
+					if (n[x] != '\0') {
+						break;
+					}
+				}
+				x--;
+			}
+			return x<0?ret:-1;
+
+		}
 		bool isPrintfSafe(const char* s) {
 			int i = 0; 
 			while(s[i] != '\0') {
