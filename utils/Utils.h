@@ -18,6 +18,9 @@ namespace Skele_lib {
 		char longToChar(long x){ /// returns the LSD of the passed in int as a char
 			return (x % 10) + 48;
 		}
+		bool isIntegral(char c) {
+			return c >= '0' && c <= '9';
+		}
 		int CharToInt(char c) {
 			/*
 			* this works because the chars are stored as numbers so you can cast (convert) from char to int
