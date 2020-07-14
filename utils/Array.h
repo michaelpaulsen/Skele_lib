@@ -1,4 +1,5 @@
 #pragma once
+#define Array_Loaded
 #include <cassert>
 #include <exception>
 #include <iostream>
