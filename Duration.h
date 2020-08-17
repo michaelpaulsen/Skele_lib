@@ -31,6 +31,15 @@ namespace Skele_lib {
 		float toSeconds() {
 			return (((this->hours * 60) + this->minutes) * 60) + this->seconds;
 		};
+		float toMinutes() {
+			return this->toSeconds() / 60.0; 
+		}
+		float toHours() {
+			return this->toMinutes() / 60.0; 
+		}
+		float toDays() {
+			return this->toHours() / 24.0; 
+		}
 		int getMinutes() {
 			return this->minutes;
 		}
