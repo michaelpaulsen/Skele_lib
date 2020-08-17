@@ -6,6 +6,14 @@ namespace Skele_lib {
 		int minutes;
 		float seconds;
 	public:
+		
+		static Duration averageDur(Duration* dirs) {
+			float total = 0.0f;
+			for (int x = 0; x < sizeof(dirs)-1; x++) {
+				total += dirs[x].toSeconds();
+			}
+			total /= sizeof(dirs)-1; 
+			return Duration(total);
 		}
 		Duration(            ) = default;//default constructor 
 		Duration(Duration& o ) = default;//copy constructor 
