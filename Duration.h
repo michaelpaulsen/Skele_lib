@@ -1,15 +1,15 @@
 #pragma once
+#include <math.h>
 namespace Skele_lib {
 	class Duration {
 		int hours;
 		int minutes;
 		float seconds;
 	public:
-		Duration() {
-			this->hours = 0;
-			this->minutes = 0;
-			this->seconds = 0;
 		}
+		Duration(            ) = default;//default constructor 
+		Duration(Duration& o ) = default;//copy constructor 
+		Duration(Duration&& o) = default;// forward referance(?) copy constructor 
 		Duration(int hours, int minutes, float seconds) {
 			this->hours = hours;
 			this->minutes = minutes;
