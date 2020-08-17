@@ -23,6 +23,11 @@ namespace Skele_lib {
 			this->minutes = minutes;
 			this->seconds = seconds;
 		}
+		Duration(float _seconds) {
+			this->seconds = fmod(_seconds,60); 
+			this->minutes = fmod((_seconds / 60), 60); 
+			this->hours   = _seconds / 3600;
+		}
 		float toSeconds() {
 			return (((this->hours * 60) + this->minutes) * 60) + this->seconds;
 		};
@@ -41,25 +46,25 @@ namespace Skele_lib {
 			this->seconds = s;
 		}
 		Duration operator+ (Duration o) {
-			return Duration(this->hours + o.getHours(), this->minutes + o.getMinutes(), this->seconds + o.getSeconds());
+			return Duration(this->toSeconds() + o.toSeconds());
 		}
 		Duration operator- (Duration o) {
-			return Duration(this->hours - o.getHours(), this->minutes - o.getMinutes(), this->seconds - o.getSeconds());
+			return Duration(this->toSeconds() - o.toSeconds());
 		}
 		bool operator== (Duration o) {
-			return (this->hours == o.getHours() && this->minutes == o.getMinutes() && this->seconds == o.getSeconds());
+			return (this->toSeconds() == o.toSeconds());
 		}
 		bool operator>= (Duration o) {
-			return (this->hours >= o.getHours() && this->minutes >= o.getMinutes() && this->seconds >= o.getSeconds());
+			return (this->toSeconds() >= o.toSeconds());
 		}
 		bool operator<= (Duration o) {
-			return (this->hours <= o.getHours() && this->minutes <= o.getMinutes() && this->seconds <= o.getSeconds());
+			return (this->toSeconds() <= o.toSeconds());
 		}
 		bool operator< (Duration o) {
-			return (this->hours < o.getHours() && this->minutes < o.getMinutes() && this->seconds < o.getSeconds());
+			return (this->toSeconds() < o.toSeconds());
 		}
 		bool operator> (Duration o) {
-			return (this->hours > o.getHours() && this->minutes > o.getMinutes() && this->seconds > o.getSeconds());
+			return (this->toSeconds() > o.toSeconds());
 		}
 	};
 }
