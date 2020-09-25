@@ -1,0 +1,5 @@
+
+*.json
+.vs/Skele_lib/v16/.suo
+*.db
+*.sqlite
