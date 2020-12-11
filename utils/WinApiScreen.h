@@ -1,11 +1,6 @@
 #pragma once
-#include <iostream>
-#include <math.h>
-#include <thread>
 #include <vector>
-#include <stdio.h>
 #include <Windows.h>
-#include <conio.h>
 namespace Skele_lib {
 	namespace CustomWinAPI{
 		namespace screen {
