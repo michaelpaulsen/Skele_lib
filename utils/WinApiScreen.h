@@ -23,7 +23,12 @@ namespace Skele_lib {
 				void writeScreen() {
 					WriteConsoleOutputCharacter(this->hConsole, this->screen, this->h * this->w, { 0,0 }, &this->dwBytesWritten);
 				}
-				
+				int getScreenWidth() {
+					return this->w; 
+				}
+				int getScreenHeight() {
+					return this->h;
+				}
 			};
 		}
 	}
