@@ -6,10 +6,10 @@ namespace Skele_lib {
 		namespace screen {
 			class Screen {
 				DWORD dwBytesWritten = 0;
-				wchar_t* screen;
-				HANDLE hConsole; 
+				HANDLE hConsole;
 				int w, h;
 			public:
+				wchar_t* screen;
 				Screen(int w, int h) {
 					hConsole = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
 					SetConsoleActiveScreenBuffer(this->hConsole);
