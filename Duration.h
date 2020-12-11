@@ -75,5 +75,10 @@ namespace Skele_lib {
 		bool operator> (Duration o) {
 			return (this->toSeconds() > o.toSeconds());
 		}
+		void operator= (const Duration& a) {
+			this->hours   = a.hours;
+			this->minutes = a.minutes;
+			this->seconds = a.seconds;
+		};
 	};
 }
