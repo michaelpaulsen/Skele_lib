@@ -82,6 +82,7 @@ namespace Skele_lib {
 			}
 			for (int x = d-1; x > -1; x--) {
 				s[x] = intToChar((t%pow)/(pow/10)); 
+				/*get the powth number of the passed in int */
 				pow *= 10; 
 			}
 			return s; 
