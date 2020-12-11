@@ -4,6 +4,7 @@ namespace Skele_lib {
 	namespace RPG {
 		class Entity {
 		public:
+			enum direction { East, West, North, South }; 
 			int x, y, speed,type;
 			Entity() {}
 			virtual bool move(int dir) {
@@ -14,16 +15,5 @@ namespace Skele_lib {
 				return false; 
 			};
 		};
-		class Item {
-		public: 
-			Item() {
-			};
-			std::string name;
-			int range = -1;
-			int type;
-			virtual bool use() = 0; // override this to implement a use 
-		};
-		};
-
 	}
 }
