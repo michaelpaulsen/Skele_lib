@@ -35,7 +35,10 @@ namespace Skele_lib {
 			int ret = 0; 
 			int pow = 1;
 			int x   = sizeof(n)/sizeof(char);
-			while (x >= 0) {
+			/*
+			* sizeof(char) should be 1 but it could be more 
+			*/
+			while (x >= 0 || n[x] == 0) {
 				isInt = isIntegral(n[x]);
 				if (isInt) {
 					ret += (CharToInt(n[x]) * pow); 
@@ -48,8 +51,6 @@ namespace Skele_lib {
 				}
 				x--;
 			}
-			return x<0?ret:-1;
-
 		}
 		bool isPrintfSafe(const char* s) {
 			int i = 0; 
