@@ -48,6 +48,7 @@ namespace Skele_lib {
 				}
 				x--;
 			}
+			return ret;
 		}
 		bool isPrintfSafe(const char* s) {
 			int i = 0; 
