@@ -1,5 +1,6 @@
 #pragma once
 #include <Windows.h>
+#include <conio.h>
 namespace Skele_lib {
 	namespace Utils {
 		char getChar() {
