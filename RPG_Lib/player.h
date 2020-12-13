@@ -12,22 +12,26 @@ namespace Skele_lib {
 				switch (dir)
 				{
 				case 1: {
+					this->dir = North;
 					// up
 					this->y -= this->speed;
 					return true;
 				}
 				case 2: {
 					// right
+					this->dir = East;
 					this->x += this->speed;
 					return true;
 				}
 				case 3: {
 					// down
+					this->dir = South;
 					this->y += this->speed;
 					return true;
 				}
 				case 4: {
 					// left
+					this->dir = West;
 					this->x -= this->speed;
 					return true;
 				}
@@ -37,3 +41,4 @@ namespace Skele_lib {
 			}
 		};
 	}
+}
