@@ -5,6 +5,7 @@ namespace Skele_lib {
 		class Item {
 		public:
 			Item() {
+				type = NULL; 
 			};
 			std::string name;
 			int range = -1;

@@ -5,11 +5,15 @@ namespace Skele_lib {
 		enum class Direction { East = 2, West = 4, North = 1, South = 3 }; 
 		class Entity {
 		public:
-			Direction dir = Direction::North; 
+			Direction dir;
 			int x, y, speed,type;
 			Entity() {
 				x = 5; 
 				y = 5; 
+				speed = 0;
+				type = 0;
+				dir = Direction::North;
+
 			};
 			virtual bool move(int dir) {
 				return false;

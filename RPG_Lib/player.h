@@ -57,7 +57,7 @@ namespace Skele_lib {
 						 return 0x31f;
 					}
 				}
-
+				return ' '; 
 			}
 		};
 	}
