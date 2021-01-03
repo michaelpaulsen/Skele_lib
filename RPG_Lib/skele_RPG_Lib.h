@@ -2,7 +2,7 @@
 #include <string>
 namespace Skele_lib {
 	namespace RPG {
-		enum class Direction { East = 2, West = 4, North = 1, South = 3 }; 
+		enum class Direction { North = 1, East = 2, South = 3, West = 4};
 		class Entity {
 		public:
 			Direction dir;
@@ -17,11 +17,17 @@ namespace Skele_lib {
 			};
 			virtual bool move(int dir) {
 				return false;
-				/*not pure because there is entities that I don't want to move*/
+				/*not pure because there is entities that don't want to move*/
 			}
 			virtual bool interact(int interactionType) {
 				return false; 
 			};
+			virtual bool use(int type) {
+				return false;
+			}
+			virtual bool useOnEntity(int type, Entity other) {
+				return false;
+			}
 		};
 	}
 }
