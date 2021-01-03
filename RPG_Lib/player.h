@@ -39,6 +39,27 @@ namespace Skele_lib {
 					return false;
 				}
 			}
+			virtual wchar_t getSprite() {
+				switch (player1.dir) {
+					/*
+					change what "sprite" is shown based off of what direction the player is facing
+					should be a virtual function in the Skele_lib::RPG::Player class
+					*/
+				case Skele_lib::RPG::Direction::North: {
+					return 0x31d;
+				}
+				case Skele_lib::RPG::Direction::East: {
+					return 0x319;
+				}
+				case Skele_lib::RPG::Direction::South: {
+					return 0x31e;
+				}
+				case Skele_lib::RPG::Direction::West: {
+					 return 0x31f;
+				}
+				}
+
+			}
 		};
 	}
 }
