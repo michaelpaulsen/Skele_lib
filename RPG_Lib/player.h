@@ -40,7 +40,7 @@ namespace Skele_lib {
 				}
 			}
 			virtual wchar_t getSprite() {
-				switch (player1.dir) {
+				switch (this->dir) {
 					/*
 					change what "sprite" is shown based off of what direction the player is facing
 					*/
