@@ -79,7 +79,11 @@ namespace Skele_lib {
 		}
 		char* intToString(int t) {
 			int pow = 10;
-			int d = (log(t) / log(10)) + 1;
+			int d = ceil((log(t) / log(10)));
+			/*
+			* logY(x) = y means Y^x = y
+			* there for the ceiling of log10 returns the number of digits a number has
+			*/
 			char* s = static_cast<char*>(calloc(d+1, sizeof(char)));
 			for (int x = 0; x < d; x++) {
 				s[x] = '0'; 
