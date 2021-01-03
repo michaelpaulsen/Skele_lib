@@ -3,6 +3,9 @@
 #include <conio.h>
 namespace Skele_lib {
 	namespace Utils {
+		int getNthdigit(int in, int pow) {
+			return (in % pow) / (pow / 10);
+		}
 		char getChar() {
 			/// read a single character from the console without echoing the character
 			return _getch();
@@ -82,11 +85,12 @@ namespace Skele_lib {
 				s[x] = '0'; 
 			}
 			for (int x = d-1; x > -1; x--) {
-				s[x] = intToChar((t%pow)/(pow/10)); 
+				s[x] = intToChar(getNthdigit(t,pow));
 				/*get the powth number of the passed in int */
 				pow *= 10; 
 			}
 			return s; 
 		}
 	}
+
 }
