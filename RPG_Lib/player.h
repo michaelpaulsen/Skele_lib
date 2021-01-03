@@ -12,26 +12,26 @@ namespace Skele_lib {
 				switch (dir)
 				{
 				case 1: {
-					this->dir = North;
+					this->dir = Skele_lib::RPG::Direction::North;
 					// up
 					this->y -= this->speed;
 					return true;
 				}
 				case 2: {
 					// right
-					this->dir = East;
+					this->dir = Skele_lib::RPG::Direction::East;
 					this->x += this->speed;
 					return true;
 				}
 				case 3: {
 					// down
-					this->dir = South;
+					this->dir = Skele_lib::RPG::Direction::South;
 					this->y += this->speed;
 					return true;
 				}
 				case 4: {
 					// left
-					this->dir = West;
+					this->dir = Skele_lib::RPG::Direction::West;
 					this->x -= this->speed;
 					return true;
 				}

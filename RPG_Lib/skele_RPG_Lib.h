@@ -2,10 +2,10 @@
 #include <string>
 namespace Skele_lib {
 	namespace RPG {
-		enum Direction { East = 2, West = 4, North = 1, South = 3 }; 
+		enum class Direction { East = 2, West = 4, North = 1, South = 3 }; 
 		class Entity {
 		public:
-			Direction dir = North; 
+			Direction dir = Direction::North; 
 			int x, y, speed,type;
 			Entity() {
 				x = 5; 
