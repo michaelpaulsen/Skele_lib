@@ -22,7 +22,7 @@ namespace Skele_lib {
 		int CharToInt(char c) {
 			/*
 			* this works because the chars are stored as numbers so you can cast (convert) from char to int
-			* this also means that you can compare and to math on chars
+			* this also means that you can compare and do math on chars
 			*/
 			if (isIntegral(c)){
 				return (c - '0'); 
