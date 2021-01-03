@@ -85,9 +85,6 @@ namespace Skele_lib {
 			* there for the ceiling of log10 returns the number of digits a number has
 			*/
 			char* s = static_cast<char*>(calloc(d+1, sizeof(char)));
-			for (int x = 0; x < d; x++) {
-				s[x] = '0'; 
-			}
 			for (int x = d-1; x > -1; x--) {
 				s[x] = intToChar(getNthdigit(t,pow));
 				/*get the powth number of the passed in int */
