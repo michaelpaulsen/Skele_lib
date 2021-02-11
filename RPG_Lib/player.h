@@ -8,7 +8,7 @@ namespace Skele_lib {
 			Player(int speed = 2) {
 				this->speed = speed;
 			}
-			bool move(int dir) override {
+			virtual bool move(int dir) override {
 				switch (dir)
 				{
 				case 1: {
