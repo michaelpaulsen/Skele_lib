@@ -24,6 +24,12 @@ namespace Skele_lib {
 				assert(this->data != nullptr);
 			}
 		public:
+			Array() {
+				data = static_cast<t*>(malloc(sizeof(t) * 5));
+				assert(this->data != nullptr);
+				this->length = 5;
+				this->items = 0;
+			}
 			Array(int length) {
 				data = static_cast<t*>(malloc(sizeof(t) * length));
 				assert(this->data != nullptr);
@@ -40,9 +46,6 @@ namespace Skele_lib {
 			void Push(t newLast) {
 				if (this->items == this->length) {
 					this->resize(2, 1);
-					for (int x = this->items; x < this->length; x++) {
-						this->data[x] = NULL; 
-					}
 				}
 				this->data[this->items] = newLast;
 				this->items++;
