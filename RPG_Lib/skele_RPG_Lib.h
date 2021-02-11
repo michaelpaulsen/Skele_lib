@@ -28,6 +28,20 @@ namespace Skele_lib {
 			virtual bool useOnEntity(int type, Entity other) {
 				return false;
 			}
+			virtual void wrap(int sw, int sh) {
+				if (this->x <= 0) {
+					this->x = sw - 3;
+				}
+				if (this->x >= sw) {
+					this->x = 3;
+				}
+				if (this->y <= 0) {
+					this->y = sh- 3;
+				}
+				if (this->y >= sh) {
+					this->y = 3;
+				}
+			}
 		};
 	}
 }
