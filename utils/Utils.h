@@ -1,5 +1,6 @@
 #pragma once
 #include <Windows.h>
+#include <math.h>
 #include <conio.h>
 namespace Skele_lib {
 	namespace Utils {
@@ -16,7 +17,7 @@ namespace Skele_lib {
 		char intToChar(int x){ /// returns the LSD of the passed in int as a char
 			return (x % 10) + 48;
 		}
-		char longToChar(long x){ /// returns the LSD of the passed in int as a char
+		char longToChar(long x){ /// returns the LSD of the passed in long as a char
 			return (x % 10) + 48;
 		}
 		bool isIntegral(char c) {
