@@ -1,6 +1,4 @@
 #pragma once; 
-namespace Skele_lib{
-	namespace Math{
 #include <utility>
 #include <math.h>
 
