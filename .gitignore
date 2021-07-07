@@ -3,3 +3,7 @@
 .vs/Skele_lib/v16/.suo
 *.db
 *.sqlite
+.vs/Skele_lib/v16/ipch/AutoPCH/3cb79ba9a6d62269/MATH.ipch
+.vs/Skele_lib/v16/Browse.VC.opendb
+.vs/Skele_lib/v16/Browse.VC.db-wal
+.vs/Skele_lib/v16/Browse.VC.db-shm
