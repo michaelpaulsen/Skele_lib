@@ -23,11 +23,8 @@ namespace Skele_lib {
                 screenRect->y = 0; 
                 screenRect->h = size_h;
                 screenRect->w = size_w;
-
-               
-               if(SDL_Init(SDL_INIT_VIDEO) >= 0) {
+                if(SDL_Init(SDL_INIT_VIDEO) >= 0) {
                     //Create window
-           
                     window = SDL_CreateWindow(name, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                                               screenRect->w,screenRect->h, SDL_WINDOW_SHOWN);
                     if (window == NULL)
@@ -47,7 +44,7 @@ namespace Skele_lib {
                 for (auto x : actors) {
                     t2 = std::chrono::system_clock::now();
                     FelapsedTime = (t2.time_since_epoch() - t1.time_since_epoch());
-                    x->Tick(FelapsedTime.count()    , screen_width, screen_hieght);
+                    x->Tick(FelapsedTime.count(), screenRect->w, screenRect->h);
                 }
                 t1 = t2;
 
