@@ -14,9 +14,6 @@ namespace Skele_lib {
             SDL_Window* window = NULL;
             SDL_Rect* screenRect = NULL; 
             std::chrono::time_point<std::chrono::system_clock> t1 = std::chrono::system_clock::now();
-            static void errormsg(int error) {
-                printf("error code %d reached", error);
-            }
             std::vector<Physics::RigidBody*> actors; 
         public:
             Window(const char* name, const int size_w, const int size_h) {
@@ -25,12 +22,9 @@ namespace Skele_lib {
                 screenRect->y = 0; 
                 screenRect->h = size_h;
                 screenRect->w = size_w;
-                if (SDL_Init(SDL_INIT_VIDEO) < 0)
-                {
-                    errormsg(-1);
-                }
-                else
-                {
+
+               
+               if(SDL_Init(SDL_INIT_VIDEO) >= 0) {
                     //Create window
            
                     window = SDL_CreateWindow(name, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
