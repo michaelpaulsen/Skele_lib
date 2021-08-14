@@ -27,7 +27,16 @@ namespace Skele_lib {
 #else 
                 double velocityx, velocityy, accelerationx, accelerationy, targetSpeedx, targetSpeedy, worldGravityx, worldGravityy, x, y;
 #endif
+                std::vector<char*> tags; 
                 Sprite sprite;
+                bool HasTag(char* tagName) {
+                    for (const auto& x : tags) {
+                        if (x == tagName) {
+                            return true; 
+                        }
+                    }
+                    return false; 
+                }
                 void LoadSprite(const char* file, int x, int y, int w, int h) {
                     sprite = Sprite(file, x, y, w, h);
 
@@ -71,6 +80,9 @@ namespace Skele_lib {
                         return;
                     }
 #endif
+                }
+                void AddTag(char* tagName) {
+                    tags.push_back(tagName);
                 }
                 virtual void Tick(float FelapsedTime, int W_w, int W_h) = 0;
                 virtual void CaculateVelocity(float FelapsedTime, double t) {
