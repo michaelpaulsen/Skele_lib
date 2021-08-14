@@ -27,6 +27,7 @@ namespace Skele_lib {
                     //Create window
                     window = SDL_CreateWindow(name, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                                               screenRect->w,screenRect->h, SDL_WINDOW_SHOWN);
+                    screenRenderer = SDL_CreateRenderer(window, 1, SDL_RENDERER_ACCELERATED);
                     if (window == NULL)
                     {
                         printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
@@ -36,7 +37,14 @@ namespace Skele_lib {
                         //Get window surface
                         screenSurface = SDL_GetWindowSurface(window);
                     }
-                }
+                    if (screenRenderer == NULL)
+                    {
+                        printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
+                    }
+                    else {
+                        SDL_SetRenderDrawColor(screenRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+                    }
+               }
             }
             void UpdateAll() {
                 auto t2 = std::chrono::system_clock::now();
