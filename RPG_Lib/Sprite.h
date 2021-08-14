@@ -23,16 +23,18 @@ namespace Skele_lib {
 				}
 			}
 			Sprite() = default;
-			Sprite(const char* file, int x, int y, int w, int h) {
+			Sprite(const char* file, int x, int y, int w, int h, bool isStatic = true) {
 				posSize->x = x;
 				posSize->y = y;
 				posSize->w = w;
 				posSize->h = h;
-				this->image = SDL_LoadBMP(file);
-				if (image == NULL)
+				if (isStatic) {
+					this->image_surface = SDL_LoadBMP(file);
+				if (image_surface == NULL)
 				{
 					printf("Unable to load image %s! SDL Error: %s\n", file, SDL_GetError());
 				}
+			}
 			};
 			SDL_Rect* posSize = new SDL_Rect;
 			SDL_Surface* image = NULL;
