@@ -7,7 +7,8 @@ namespace Skele_lib {
 		public:
 
 			SDL_Surface* getSurface() {
-				return this->image;
+				if(isStatic) return this->image_surface;
+				return NULL; 
 			}
 			auto StoreImage(const char* filename) {
 				image = SDL_LoadBMP(filename);
