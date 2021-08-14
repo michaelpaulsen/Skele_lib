@@ -10,7 +10,6 @@ namespace Skele_lib {
     namespace GameEngine {
 
         class Window {
-            int screen_width, screen_hieght; 
             SDL_Surface* screenSurface = NULL;
             SDL_Window* window = NULL;
             SDL_Rect* screenRect = NULL; 
@@ -21,8 +20,6 @@ namespace Skele_lib {
             std::vector<Physics::RigidBody*> actors; 
         public:
             Window(const char* name, const int size_w, const int size_h) {
-                screen_width = size_w;
-                screen_hieght = size_h;
                 screenRect = new SDL_Rect; 
                 screenRect->x = 0; 
                 screenRect->y = 0; 
@@ -37,7 +34,7 @@ namespace Skele_lib {
                     //Create window
            
                     window = SDL_CreateWindow(name, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-                                              screen_width, screen_hieght, SDL_WINDOW_SHOWN);
+                                              screenRect->w,screenRect->h, SDL_WINDOW_SHOWN);
                     if (window == NULL)
                     {
                         printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
@@ -81,8 +78,8 @@ namespace Skele_lib {
                 return screenSurface != NULL; 
             }
             */
-            auto UpdateScreen() {
-               return SDL_UpdateWindowSurface(window);
+            void UpdateScreen() {
+                SDL_UpdateWindowSurface(window);
             }
             auto DrawSurface(SDL_Surface* sin, SDL_Rect* rin = NULL) {
                 SDL_BlitSurface(sin, rin, screenSurface, screenRect);
