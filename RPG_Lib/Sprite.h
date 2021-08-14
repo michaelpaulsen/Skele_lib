@@ -10,14 +10,17 @@ namespace Skele_lib {
 				if(isStatic) return this->image_surface;
 				return NULL; 
 			}
-			auto StoreImage(const char* filename) {
-				image = SDL_LoadBMP(filename);
-				if (image == NULL)
-				{
-					printf("Unable to load image %s! SDL Error: %s\n", filename, SDL_GetError());
-					return false; 
+			void StoreImage(const char* filename) {
+				if(isStatic){
+					image_surface = SDL_LoadBMP(filename);
+					if (image_surface == NULL)
+					{
+						printf("Unable to load image %s! SDL Error: %s\n", filename, SDL_GetError()); 
+					}
 				}
-				return true;
+				else {
+
+				}
 			}
 			Sprite() = default;
 			Sprite(const char* file, int x, int y, int w, int h) {
