@@ -2,7 +2,7 @@
 #include <SDL.h>
 namespace Skele_lib {
 	namespace GameEngine {
-		class Sprite
+		struct Sprite
 		{
 		public:
 
@@ -30,9 +30,7 @@ namespace Skele_lib {
 					printf("Unable to load image %s! SDL Error: %s\n", file, SDL_GetError());
 				}
 			};
-
-		private:
-			SDL_Rect* posSize;
+			SDL_Rect* posSize = new SDL_Rect;
 			SDL_Surface* image = NULL;
 		};
 	}
