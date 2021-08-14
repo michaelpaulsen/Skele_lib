@@ -55,7 +55,7 @@ namespace Skele_lib {
 
 
             }
-            bool DrawFilledRect(const SDL_Rect* rect, Uint32 color) {
+            /*bool DrawFilledRect(const SDL_Rect* rect, Uint32 color) {
                 Color::Color_t c = Color::Color_t(color);
                 if (screenSurface != NULL) {
                     SDL_FillRect(screenSurface, rect, SDL_MapRGB(screenSurface->format, c.r, c.g, c.b));
@@ -74,6 +74,7 @@ namespace Skele_lib {
                 }
                 return screenSurface != NULL; 
             }
+            */
             auto UpdateScreen() {
                return SDL_UpdateWindowSurface(window);
             }
