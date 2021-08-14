@@ -9,6 +9,14 @@ namespace Skele_lib {
                 RIGHT = 2,
                 LEFT = 4
             };
+            enum CollisionType {
+                BOUNCE = 1,
+                REFLECT = 2, 
+                PUSH = 3,
+                DAMPEN = 4, 
+                INTERACT = 5, 
+                
+            };
             struct RigidBody {
 #if vector2d
                 V2dD velocity;
