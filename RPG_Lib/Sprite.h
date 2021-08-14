@@ -30,9 +30,6 @@ namespace Skele_lib {
 					printf("Unable to load image %s! SDL Error: %s\n", file, SDL_GetError());
 				}
 			};
-			~Sprite() {
-				free(this->image);
-			};
 
 		private:
 			SDL_Rect* posSize;
