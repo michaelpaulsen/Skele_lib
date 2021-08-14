@@ -63,7 +63,7 @@ namespace Skele_lib {
                 return screenSurface != NULL; 
             }
             bool DrawFilledRectChord(int x, int y, int w, int h, Uint32 color) {
-                SDL_Rect* rect = static_cast<SDL_Rect*>(malloc(sizeof(SDL_Rect))); 
+                SDL_Rect* rect = new SDL_Rect; 
                 rect->x = x; 
                 rect->y = y; 
                 rect->w = w; 
