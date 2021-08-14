@@ -8,3 +8,8 @@
 .vs/Skele_lib/v16/Browse.VC.db-wal
 .vs/Skele_lib/v16/Browse.VC.db-shm
 sdl2/
+RPG_Lib.bak/World.h++
+RPG_Lib.bak/skele_RPG_Lib.h
+RPG_Lib.bak/player.h
+RPG_Lib.bak/Item.h
+RPG_Lib.bak/includeAll.h

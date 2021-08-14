@@ -1,0 +1,5 @@
+Window is the main class. This handles window updates this class should hold all of the draw-related SDL abstractions.
+
+RigidBody is a pure virtual class that is meant to represent anything that is in the Physics loop. Use this to make sprites.
+
+Sprite Class is an abstraction of the SDL_Surface struct it is used to draw to the screen. You should never create a Sprite by hand instead you should create a RigidBody make a Rigidbody that is static as the Rigidbody will handle collisions [not yet implemented]
