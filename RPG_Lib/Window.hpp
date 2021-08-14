@@ -70,14 +70,14 @@ namespace Skele_lib {
                 return screenSurface != NULL; 
             }
             */
-            void UpdateScreen() {
-                SDL_UpdateWindowSurface(window);
-            }
-            auto DrawSurface(SDL_Surface* sin, SDL_Rect* rin = NULL) {
+            void DrawSurface(SDL_Surface* sin, SDL_Rect* rin = NULL) {
                 SDL_BlitSurface(sin, rin, screenSurface, screenRect);
             }
             void AddRigidBody(Physics::RigidBody* rb) {
                 actors.push_back(rb);
+            }
+            void UpdateScreen() {
+                SDL_UpdateWindowSurface(window);
             }
             ~Window() {
                 //Destroy window
