@@ -13,6 +13,7 @@ namespace Skele_lib {
             int screen_width, screen_hieght; 
             SDL_Surface* screenSurface = NULL;
             SDL_Window* window = NULL;
+            SDL_Rect* screenRect = NULL; 
             std::chrono::time_point<std::chrono::system_clock> t1 = std::chrono::system_clock::now();
             static void errormsg(int error) {
                 printf("error code %d reached", error);
@@ -22,6 +23,11 @@ namespace Skele_lib {
             Window(const char* name, const int size_w, const int size_h) {
                 screen_width = size_w;
                 screen_hieght = size_h;
+                screenRect = new SDL_Rect; 
+                screenRect->x = 0; 
+                screenRect->y = 0; 
+                screenRect->h = size_h;
+                screenRect->w = size_w;
                 if (SDL_Init(SDL_INIT_VIDEO) < 0)
                 {
                     errormsg(-1);
@@ -78,7 +84,9 @@ namespace Skele_lib {
             auto UpdateScreen() {
                return SDL_UpdateWindowSurface(window);
             }
-
+            auto DrawSurface(SDL_Surface* sin, SDL_Rect* rin = NULL) {
+                SDL_BlitSurface(sin, rin, screenSurface, screenRect);
+            }
             void AddRigidBody(Physics::RigidBody* rb) {
                 actors.push_back(rb);
             }
