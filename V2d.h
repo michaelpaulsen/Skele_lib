@@ -109,4 +109,7 @@ namespace Skele_lib{
 			return temp;
 		}
 	}
+	typedef	Skele_lib::Math::V2d<int>       V2dI;
+	typedef Skele_lib::Math::V2d<float>     V2dF;
+	typedef Skele_lib::Math::V2d<double>    V2dD;
 }
