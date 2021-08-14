@@ -43,7 +43,7 @@ namespace Skele_lib {
                     }
                 }
             }
-            bool UpdateAll() {
+            void UpdateAll() {
                 auto t2 = std::chrono::system_clock::now();
                 std::chrono::duration<float> FelapsedTime = std::chrono::duration_cast<std::chrono::seconds>(t1-t2);
                 for (auto x : actors) {
