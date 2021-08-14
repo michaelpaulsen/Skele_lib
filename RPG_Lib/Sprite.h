@@ -37,7 +37,6 @@ namespace Skele_lib {
 			}
 			};
 			SDL_Rect* posSize = new SDL_Rect;
-			SDL_Surface* image = NULL;
 			union{
 				SDL_Texture* image_texture; 
 				SDL_Surface* image_surface;
