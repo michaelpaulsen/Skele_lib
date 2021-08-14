@@ -12,7 +12,8 @@ namespace Skele_lib {
         class Window {
             SDL_Surface* screenSurface = NULL;
             SDL_Window* window = NULL;
-            SDL_Rect* screenRect = NULL; 
+            SDL_Rect* screenRect = NULL;
+            SDL_Renderer* screenRenderer = NULL;
             std::chrono::time_point<std::chrono::system_clock> t1 = std::chrono::system_clock::now();
             std::vector<Physics::RigidBody*> actors; 
         public:
