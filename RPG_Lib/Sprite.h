@@ -30,7 +30,7 @@ namespace Skele_lib {
 				}
 			}
 			Sprite() = default;
-			Sprite(const char* file, int x, int y, int w, int h, bool isStatic = true) {
+			Sprite(const char* file, int x, int y, int w, int h, bool isStatic = true, SDL_Renderer* renderer = NULL) {
 				posSize->x = x;
 				posSize->y = y;
 				posSize->w = w;
