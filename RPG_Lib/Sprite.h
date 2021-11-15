@@ -5,8 +5,15 @@ namespace Skele_lib {
 		struct Sprite
 		{
 		public:
-
-			SDL_Surface* getSurface() {
+			void SetTexture() {
+				if (!isStatic) {
+						
+				}
+			}
+			SDL_Texture* GetTexture() {
+				 
+			}
+			SDL_Surface* GetSurface() {
 				if(isStatic) return this->image_surface;
 				return NULL; 
 			}
