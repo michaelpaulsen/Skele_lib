@@ -37,11 +37,26 @@ namespace Skele_lib {
 				posSize->h = h;
 				if (isStatic) {
 					this->image_surface = SDL_LoadBMP(file);
-				if (image_surface == NULL)
-				{
-					printf("Unable to load image %s! SDL Error: %s\n", file, SDL_GetError());
+					if (image_surface == NULL)
+					{
+						printf("Unable to load image %s! SDL Error: %s\n", file, SDL_GetError());
+					}
 				}
-			}
+				else {
+					this->isStatic = false; 
+					/*load sprite*/
+					auto tempSurface = SDL_LoadBMP(file);
+
+					if (tempSurface == NULL)
+					{
+						printf("Unable to load image %s! SDL_image Error: %s\n", file, SDL_GetError());
+					}
+					else
+					{
+						image_texture = SDL_CreateTextureFromSurface(renderer, tempSurface);
+					}
+					SDL_FreeSurface(tempSurface); /// free can be used here? 
+				}
 			};
 			SDL_Rect* posSize = new SDL_Rect;
 			union{
