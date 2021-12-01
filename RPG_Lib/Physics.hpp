@@ -88,6 +88,8 @@ namespace Skele_lib {
                 virtual void CaculateVelocity(float FelapsedTime, double t) {
                     //PARAMA: t doesn't need to be used so I put it in here for delayed lerp and cubic interpolation types of acceleration curves 
                     // I also made implemented a delayed learp 
+                    velocityx += worldGravityx;
+                    velocityy += worldGravityy;
 #if vector2d 
                     if (velocity.x / targetSpeed.x < t / targetSpeed.x) {
                         velocity.x += acceleration.x;
@@ -97,7 +99,6 @@ namespace Skele_lib {
                             velocity.x += --acceleration.x;
                         }
                     }
-                    velocity.x += worldGravity.x;
                     if (velocity.y / targetSpeed.y < t / targetSpeed.y) {
                         velocity.y -= acceleration.y;
                     }
@@ -110,8 +111,8 @@ namespace Skele_lib {
 
                         }
                     }
-                    velocity.y += worldGravity.y; 
 #else 
+
                     if (velocityx / targetSpeedx < t / targetSpeedx) {
                         velocityx +=   accelerationx;
                     }
@@ -123,7 +124,7 @@ namespace Skele_lib {
                             velocityx += ++accelerationx;
                         }
                     }
-                    velocityx += worldGravityx;
+                    
                     if (velocityy / targetSpeedy < t / targetSpeedy) {
                         velocityy +=   accelerationy;
                     }
