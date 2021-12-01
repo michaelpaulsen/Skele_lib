@@ -76,7 +76,7 @@ namespace Skele_lib {
                         return;
                     }
                     if (newGravityDir == GravityDirection::RIGHT) {
-                        worldGravityx = -1;
+                        worldGravityx = 1;
                         return;
                     }
 #endif
