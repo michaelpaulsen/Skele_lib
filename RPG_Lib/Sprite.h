@@ -21,7 +21,8 @@ namespace Skele_lib {
 				}
 			}
 			SDL_Texture* GetTexture() {
-				 
+				if (!this->isStatic)return this->image_texture; 
+				return NULL; 
 			}
 			SDL_Surface* GetSurface() {
 				if(isStatic) return this->image_surface;
