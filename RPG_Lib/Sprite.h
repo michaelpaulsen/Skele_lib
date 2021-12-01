@@ -5,9 +5,19 @@ namespace Skele_lib {
 		struct Sprite
 		{
 		public:
-			void SetTexture() {
+			void SetTexture(const char* filename, SDL_Renderer* renderer = NULL) {
 				if (!isStatic) {
-						
+					/*load sprite*/
+					auto tempSurface = SDL_LoadBMP(filename);
+					if (tempSurface == NULL)
+					{
+						printf("Unable to load image %s! SDL_image Error: %s\n", filename, SDL_GetError());
+					}
+					else
+					{
+						image_texture = SDL_CreateTextureFromSurface(renderer, tempSurface);
+					}
+					SDL_FreeSurface(tempSurface); /// free can be used here?
 				}
 			}
 			SDL_Texture* GetTexture() {
