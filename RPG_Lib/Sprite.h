@@ -5,7 +5,7 @@ namespace Skele_lib {
 		struct Sprite
 		{
 		public:
-			void SetTexture(const char* filename, SDL_Renderer* renderer = NULL) {
+			void SetTexture(const char* filename, SDL_Renderer* renderer) {
 				if (!isStatic) {
 					/*load sprite*/
 					auto tempSurface = SDL_LoadBMP(filename);
