@@ -15,6 +15,11 @@ namespace Skele_lib{
 				DAMPEN = 4,
 				INTERACT = 5
 			};
+			enum physicsMode {
+				ignore,
+				dynamic,
+				collide, /** static*/
+			};
 			struct Physics_rect {
 				double x, y, w, h;
 			};
