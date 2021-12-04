@@ -48,11 +48,11 @@ namespace Skele_lib {
             }
             void UpdateAll() {
                 auto t2 = std::chrono::system_clock::now();
-                std::chrono::duration<float> FelapsedTime = std::chrono::duration_cast<std::chrono::seconds>(t1-t2);
+                auto FelapsedTime = (t1-t2);
                 for (auto x : actors) {
                     t2 = std::chrono::system_clock::now();
-                    FelapsedTime = (t2.time_since_epoch() - t1.time_since_epoch());
-                    x->Tick(FelapsedTime.count(), screenRect->w, screenRect->h);
+                    FelapsedTime = (t2 - t1);
+                    x->tick(FelapsedTime, screenRect->w, screenRect->h);
                 }
                 t1 = t2;
 
