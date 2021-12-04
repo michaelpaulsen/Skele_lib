@@ -17,3 +17,5 @@ RPG_Lib.bak/includeAll.h
 *.swp
 *.cpp~
 *.h~
+*.bin
+*.hpp~
