@@ -10,7 +10,7 @@ namespace Skele_lib {
 				movable objectSpeed = { 0,0,0,0 };
 				movable drag = { 2,0,0,0 };
 			public:
-				RigidBody(int x, int y, float w, float h) {
+				RigidBody(double x, double y, double w, double h) {
 					rect = { x,y,w,h }; 
 				}
 				Physics_rect getPosition() {

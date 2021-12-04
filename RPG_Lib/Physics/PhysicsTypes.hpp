@@ -16,8 +16,7 @@ namespace Skele_lib{
 				INTERACT = 5
 			};
 			struct Physics_rect {
-				int x, y;
-				float w, h;
+				double x, y, w, h;
 			};
 			struct movable {
 				double velx, vely, accx, accy;  
