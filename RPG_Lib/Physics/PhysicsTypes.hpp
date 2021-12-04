@@ -16,9 +16,9 @@ namespace Skele_lib{
 				INTERACT = 5
 			};
 			enum physicsMode {
-				ignore,
-				dynamic,
-				collide, /** static*/
+				ignore, /*skip this in the physics loop */
+				dynamic,/* fully act on this object */
+				collide,/*make it so that this object collides with other objects but not move*/
 			};
 			struct Physics_rect {
 				double x, y, w, h;
