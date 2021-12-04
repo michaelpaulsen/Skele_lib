@@ -58,6 +58,9 @@ namespace Skele_lib {
 
 
             }
+            void ClearScreen(Uint32 color) {
+                SDL_FillRect(this->screenSurface, this->screenRect, color);
+            }
             /*bool DrawFilledRect(const SDL_Rect* rect, Uint32 color) {
                 Color::Color_t c = Color::Color_t(color);
                 if (screenSurface != NULL) {
