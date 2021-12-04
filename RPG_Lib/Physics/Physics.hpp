@@ -9,9 +9,11 @@ namespace Skele_lib {
 				Physics_rect rect;
 				movable objectSpeed = { 0,0,0,0 };
 				movable drag = { 2,0,0,0 };
+				physicsMode pm; 
 			public:
-				RigidBody(double x, double y, double w, double h) {
+				RigidBody(double x, double y, double w, double h, physicsMode pn) {
 					rect = { x,y,w,h }; 
+					pm = pn; 
 				}
 				Physics_rect getPosition() {
 					return this->rect;
