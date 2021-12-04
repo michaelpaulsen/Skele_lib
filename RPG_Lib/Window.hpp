@@ -3,7 +3,7 @@
 #include <SDL.h>
 #include <vector>
 #include "../Color.hpp"
-#include "Physics.hpp"
+#include "./Physics/Physics.hpp"
 #include <chrono>
 #include <math.h>
 namespace Skele_lib {
