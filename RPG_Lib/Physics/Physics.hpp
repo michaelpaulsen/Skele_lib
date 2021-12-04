@@ -1,4 +1,5 @@
 #include "PhysicsTypes.hpp"
+#include <chrono>
 namespace Skele_lib {
 	namespace GameEngine {
 		namespace Physics {
@@ -22,9 +23,6 @@ namespace Skele_lib {
 					this->objectSpeed.velx += this->objectSpeed.accx--;
 					this->objectSpeed.velx -= this->drag.velx;
 					this->rect.x += this->objectSpeed.velx - this->drag.velx;
-				}
-				void operator()() {
-					this->tick(); 
 				}
 			};
 		}
