@@ -19,3 +19,4 @@ RPG_Lib.bak/includeAll.h
 *.h~
 *.bin
 *.hpp~
+*.old
