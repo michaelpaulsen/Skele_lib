@@ -1,3 +1,4 @@
+#pragma once
 namespace Skele_lib{
 	namespace GameEngine {
 		namespace Physics {

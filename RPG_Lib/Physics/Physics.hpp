@@ -1,3 +1,4 @@
+#pragma once
 #include "PhysicsTypes.hpp"
 #include <chrono>
 namespace Skele_lib {
