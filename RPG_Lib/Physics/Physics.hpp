@@ -19,10 +19,12 @@ namespace Skele_lib {
 					objectSpeed.accx = xcomp;
 					objectSpeed.accy = ycomp; 
 				}
-				virtual void tick(std::chrono::duration<float> FelapsedTime, int h, int w) {
-					this->objectSpeed.velx += this->objectSpeed.accx--;
-					this->objectSpeed.velx -= this->drag.velx;
-					this->rect.x += this->objectSpeed.velx - this->drag.velx;
+				virtual void tick(std::chrono::duration<float> FelapsedTime, int ScreenH, int ScreenW) {
+					if(this->pm == dynamic){ 
+						this->objectSpeed.velx += this->objectSpeed.accx--;
+						this->objectSpeed.velx -= this->drag.velx;
+						this->rect.x += this->objectSpeed.velx - this->drag.velx;
+					}
 				}
 			};
 		}
