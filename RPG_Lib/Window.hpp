@@ -70,6 +70,9 @@ namespace Skele_lib {
             void UpdateScreen() {
                 SDL_UpdateWindowSurface(window);
             }
+            SDL_Surface* GetScreenSurface() {
+                return this->screenSurface;
+            }
             ~Window() {
                 //Destroy window
                 SDL_DestroyWindow(window);

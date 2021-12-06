@@ -1,5 +1,6 @@
 #pragma once
 #include <SDL.h>
+#include "..\Window.hpp"
 namespace Skele_lib {
 	namespace GameEngine {
 		namespace GameObject {
@@ -38,22 +39,18 @@ namespace Skele_lib {
 					}
 				}
 				Sprite() = default;
-				Sprite(const char* file, int x, int y, int w, int h, bool isStatic = true, SDL_Renderer* renderer = NULL) {
+				Sprite(const char* file, int x, int y, int w, int h, Window win, bool isStatic = true, SDL_Renderer* renderer = NULL ) {
 					posSize->x = x;
 					posSize->y = y;
 					posSize->w = w;
 					posSize->h = h;
 					if (isStatic) {
-						this->image_surface = SDL_LoadBMP(file);
-						if (image_surface == NULL)
-						{
-							printf("Unable to load image %s! SDL Error: %s\n", file, SDL_GetError());
-						}
+						makeSurface(win, file);
 					}
 					else {
 						this->isStatic = false;
 						/*load sprite*/
-						auto tempSurface = SDL_LoadBMP(file);
+						auto tempSurface = makeSurface(win,file);
 
 						if (tempSurface == NULL)
 						{
@@ -71,7 +68,18 @@ namespace Skele_lib {
 					SDL_Texture* image_texture;
 					SDL_Surface* image_surface;
 				};
+			private:
 				bool isStatic = true;
+				SDL_Surface* makeSurface(Window win, const char* file) {
+					 	this->image_surface = SDL_LoadBMP(file);
+						if (image_surface == NULL)
+						{
+							printf("Unable to load image %s! SDL Error: %s\n", file, SDL_GetError());
+							return NULL; 
+						}
+						this->image_surface = SDL_ConvertSurface(this->image_surface, win.GetScreenSuface()->format, NULL);
+						return image_surface; 
+				}
 			};
 
 		}
