@@ -5,7 +5,6 @@ namespace Skele_lib {
 		namespace GameObject {
 			struct Sprite
 			{
-			public:
 				void SetTexture(const char* filename, SDL_Renderer* renderer) {
 					if (!isStatic) {
 						/*load sprite*/
