@@ -36,9 +36,6 @@ namespace Skele_lib {
 							printf("Unable to load image %s! SDL Error: %s\n", filename, SDL_GetError());
 						}
 					}
-					else {
-
-					}
 				}
 				Sprite() = default;
 				Sprite(const char* file, int x, int y, int w, int h, bool isStatic = true, SDL_Renderer* renderer = NULL) {
