@@ -4,10 +4,12 @@
 namespace Skele_lib {
 	namespace GameEngine {
 		namespace Physics {
-				Physics_rect rect;
+			struct RigidBody {
+				Physics_rect rect = { 0,0,0,0 };
 				movable objectSpeed = { 0,0,0,0 };
 				movable drag = { 2,0,0,0 };
-				physicsMode pm; 
+				physicsMode pm = ignore;
+				RigidBody() = default; 
 				RigidBody(double x, double y, double w, double h, physicsMode pn) {
 					rect = { x,y,w,h }; 
 					pm = pn; 
