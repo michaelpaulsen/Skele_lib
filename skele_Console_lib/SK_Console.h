@@ -26,16 +26,49 @@ namespace Skele_lib {
 			RESET = 0,
 		};
 		class Console {
-		public:
-			std::ostream* os;
-			std::istream* is;
-			//in stream and out stream 
-			template<typename T> bool Print(T print_me) {
-				*(this->os)<< print_me;
-				return !os->bad(); 
+			FILE* os;
+			FILE* is;
+			const char* color_code_start = "\u001b["; 
+		public: 
+			void Print(const char* print_me) {fprintf(os,"%s", print_me);}
+			void Print(int print_me) {fprintf(os,"%d", print_me);}
+			void Print(float print_me) {fprintf(os,"%f", print_me);}
+			void Warn(const char* print_me, bool bright = false) {
+				char* b = const_cast<char*>(""); 
+				if (bright) b = const_cast<char*>(";1");
+				fprintf(os,"%s%d%sm%s %s%dm",
+					color_code_start,
+					Skele_lib::Console::colors::YELLOW,
+					b,
+					print_me,
+					color_code_start,
+					0); 
 			}
+			void Warn(const int print_me, bool bright = false) {
+				char b[3] = { 0 };
+				if (bright) { b[0] = ';'; b[1] = '1'; b[2] = 0; }
+				fprintf(os,"%s%d%sm %d %s%dm",
+					color_code_start,
+					Skele_lib::Console::colors::YELLOW,
+					b,
+					print_me,
+					color_code_start,
+					0); 
+			}
+			void Warn(const float print_me, bool bright = false) {
+				char b[3] = { 0 };
+				if (bright) { b[0] = ';'; b[1] = '1'; b[2] = 0; }
+				fprintf(os,"%s%d%sm %f %s%dm",
+					color_code_start,
+					Skele_lib::Console::colors::YELLOW,
+					b,
+					print_me,
+					color_code_start,
+					0); 
+			}
+				
 			//template<typename T> static 
-			Console(std::ostream* _os = &std::cout, std::istream* _is = &std::cin) {
+			Console(FILE* _os = stdout, FILE* _is = stdin) {
 				os = _os;
 				is = _is;
 			}
