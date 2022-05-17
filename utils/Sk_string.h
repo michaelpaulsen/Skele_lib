@@ -1,8 +1,8 @@
 size_t ccptocp(const char* source, char* dest, size_t max_bytes) {
 	size_t x;
 	for (x = 0; x < max_bytes; x++) {
-		if (source[x] == 0) break;
 		dest[x] = source[x];
+		if (source[x] == 0) break;
 	}
 	return x; 
 }
