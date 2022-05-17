@@ -19,8 +19,19 @@ Reset: \u001b[0m*/
 namespace Skele_lib {
 	namespace Console {
 #ifndef WIN32
-	enum class colors {
+	enum class FG_colors {
 			BLACK = 30,
+			RED,
+			GREEN,
+			YELLOW,
+			BLUE,
+			MAGENTA,
+			CYAN,
+			WHITE,
+			RESET = 0,
+		};	
+	enum class BG_colors {
+			BLACK = 40,
 			RED,
 			GREEN,
 			YELLOW,
@@ -60,7 +71,7 @@ namespace Skele_lib {
 				if (bright) b = const_cast<char*>(";1");
 				fprintf(os, "%s%d%sm%s %s%dm",
 					color_code_start,
-					Skele_lib::Console::colors::YELLOW,
+					Skele_lib::Console::FG_colors::YELLOW,
 					b, print_me, color_code_start, 0
 				);
 			}
@@ -70,13 +81,13 @@ namespace Skele_lib {
 				if (x - (int)x != 0) {
 					fprintf(os, "%s%d%sm %f %s%dm",
 						color_code_start,
-						Skele_lib::Console::colors::YELLOW,
+						Skele_lib::Console::FG_colors::YELLOW,
 						b, (int)print_me, color_code_start, 0
 					);
 				}else{
 					fprintf(os, "%s%d%sm %d %s%dm",
 						color_code_start,
-						Skele_lib::Console::colors::YELLOW,
+						Skele_lib::Console::FG_colors::YELLOW,
 						b, print_me, color_code_start, 0
 					);
 			}
@@ -85,7 +96,7 @@ namespace Skele_lib {
 				if (bright) b = const_cast<char*>(";1");
 				fprintf(os, "%s%d%sm%s%s%dm",
 					color_code_start,
-					Skele_lib::Console::colors::RED,
+					Skele_lib::Console::FG_colors::RED,
 					b, print_me, color_code_start, 0
 				);
 			}
@@ -95,14 +106,14 @@ namespace Skele_lib {
 				if (x - (int)x != 0) {
 					fprintf(os, "%s%d%sm %f %s%dm",
 						color_code_start,
-						Skele_lib::Console::colors::RED,
+						Skele_lib::Console::FG_colors::RED,
 						b, print_me, color_code_start, 0
 					);
 				}
 				else {
 					fprintf(os, "%s%d%sm %d %s%dm",
 						color_code_start,
-						Skele_lib::Console::colors::RED,
+						Skele_lib::Console::FG_colors::RED,
                         b, (int)print_me, color_code_start, 0
 					);
 			}
