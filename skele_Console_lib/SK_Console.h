@@ -117,6 +117,25 @@ namespace Skele_lib {
                         b, (int)print_me, color_code_start, 0
 					);
 			}
+		}
+		void PrintColor(const char * print_me, int color, int BGcolor = 0) {
+			fprintf(this->os, "%s%dm %s%d%sm", color_code_start, BGcolor, color_code_start, color, b);
+			fprintf(os, "%s", print_me);
+			fprintf(this->os, "%s%dm", color_code_start, 0)
+		}
+		void PrintColor(const float print_me, int color, int BGcolor = 0) {
+			char b[3] = { 0 };
+			if (bright) { b[0] = ';'; b[1] = '1'; b[2] = 0; }
+			fprintf(this->os, "%s%dm %s%d%sm", color_code_start, BGcolor, color_code_start, color, b); 
+			if (print_me - (int)print_me == 0) {
+				//printf("%f",print_me); 
+				fprintf(this->os, "%d", (int)print_me);
+			}
+			else {
+				fprintf(this->os, "%f", print_me);
+			}
+			fprintf(this->os,"%s%dm", color_code_start,0)
+		}
 			
 #else
 			
@@ -163,6 +182,28 @@ namespace Skele_lib {
 				this->GetColor(x);
 				SetConsoleTextAttribute(this->hConsole, 76);
 				if (print_me - (int)print_me == 0) {
+					fprintf(this->os, "%d", (int)print_me);
+				}
+				else {
+					fprintf(this->os, "%f", print_me);
+				}
+				SetConsoleTextAttribute(this->hConsole, x);
+			}
+			void PrintColor(const char * print_me, int color, int BG_color =0) {
+				int c = (16 * BG_color) + color; 
+				short x;
+				this->GetColor(x);
+				SetConsoleTextAttribute(this->hConsole, c);
+				fprintf(this->os, "%s", print_me);
+				SetConsoleTextAttribute(this->hConsole, x);
+			}
+			void PrintColor(const float print_me, int color, int BG_color =0) {
+				int c = (16 * BG_color) + color; 
+				short x;
+				this->GetColor(x);
+				SetConsoleTextAttribute(this->hConsole, c);
+				if (print_me - (int)print_me == 0) {
+					//printf("%f",print_me); 
 					fprintf(this->os, "%d", (int)print_me);
 				}
 				else {
