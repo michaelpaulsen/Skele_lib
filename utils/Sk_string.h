@@ -1,3 +1,11 @@
+size_t ccptocp(const char* source, char* dest, size_t max_bytes) {
+	size_t x;
+	for (x = 0; x < max_bytes; x++) {
+		if (source[x] == 0) break;
+		dest[x] = source[x];
+	}
+	return x; 
+}
 bool cp_contains(char* source, const char* comp, size_t max_bytes) {
 	bool found; 
 	for (size_t x = 0; x < max_bytes; x++) {
