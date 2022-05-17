@@ -66,7 +66,16 @@ namespace Skele_lib {
 					color_code_start,
 					0); 
 			}
-				
+			void WLineNumber(int lineNumber, bool hl = false, bool hn = false, bool hc = false) {
+				/// @params 
+				///hl -> highlight line high lights the "line" part of the warning
+				///hn -> highlight number it highlights the line number
+				///hc -> highlight colon it higligts the colon that seperates the line number and the warning text
+				this->Warn("Warning on line ", hl);
+				this->Warn(lineNumber, hn);
+				this->Warn(": ", hc);
+			}
+
 			//template<typename T> static 
 			Console(FILE* _os = stdout, FILE* _is = stdin) {
 				os = _os;
