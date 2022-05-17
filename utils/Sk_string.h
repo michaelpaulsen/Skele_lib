@@ -1,3 +1,6 @@
+#ifndef skele_c_strings
+#define skele_c_strings
+
 size_t ccptocp(const char* source, char* dest, size_t max_bytes) {
 	size_t x;
 	for (x = 0; x < max_bytes; x++) {
@@ -56,3 +59,4 @@ size_t cp_concat(const char* source, char* drain, size_t max_bytes, size_t bytes
 	}
 	return written_bytes;
 }
+#endif // !skele_c_strings
