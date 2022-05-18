@@ -1,6 +1,34 @@
 #ifndef skele_c_strings
 #define skele_c_strings
-
+char* makeCP(size_t x) {
+	return static_cast<char*>(calloc(x, sizeof(char)));
+}
+char cp_getlast(char* str) {
+	return str[strlen(str) - 1];
+}
+bool cstrtoi(char* str, int &out) {
+	auto x = 0;
+	while (str[x]) {
+		x++;
+	}
+	--x;
+	int y = 0;
+	while (x) {
+		if (str[x] <'0' || str[x] >'9') return false;
+		out += (str[x] - '0') * pow(10, y);
+		y++;
+		--x;
+	}
+	return true;
+}
+size_t ccptocp(const char* source, char* dest, size_t max_bytes) {
+	size_t x;
+	for (x = 0; x < max_bytes; x++) {
+		dest[x] = source[x];
+		if (source[x] == 0) break;
+	}
+	return x;
+}
 size_t ccptocp(const char* source, char* dest, size_t max_bytes) {
 	size_t x;
 	for (x = 0; x < max_bytes; x++) {
