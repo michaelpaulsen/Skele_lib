@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include <stdint.h>
-#ifdef  WIN32
+#ifdef  WIN
 #include <windows.h>
 #endif //  WIN32
 
@@ -19,7 +19,7 @@ White: \u001b[37m
 Reset: \u001b[0m*/
 namespace Skele_lib {
 	namespace Console {
-#ifndef WIN32
+#ifndef WIN
 		//skele_lib::Console::FG_colors
 	enum class FG_colors {
 			BLACK = 30,
@@ -48,25 +48,18 @@ namespace Skele_lib {
 	struct Color {
 		int fgc, bgc;
 		Color() = default; 
-#ifdef WIN32
-		Color(uint8_t _f, uint8_t _b) {
+		Color(int _f, int _b) {
 			fgc = _f;
 			bgc = _b;
 		}
-#else 
-		Color(skele_lib::Console::FG_colors _f, skele_lib::Console::BG_colors _b) {
-			fgc = _f;
-			bgc = _b;
-		}
-#endif // WIN32
 	};
 	class Console {
-#ifdef WIN32
+#ifdef WIN
 		HANDLE hConsole;
 #endif
 		FILE* os;
 		FILE* is;
-#ifndef WIN32
+#ifndef WIN
 		const char* color_code_start = "\u001b[";
 #endif // 		
 	public:
@@ -74,19 +67,18 @@ namespace Skele_lib {
 		Color     ok_color; 
 		Color inform_color;
 		Color  error_color;
-		void Print(const char* print_me) { fprintf(os, "%s", print_me); }
-		void Print(const float   print_me) {
+		auto Print(const char* print_me) { return fprintf(os, "%s", print_me); }
+		auto Print(const float   print_me) {
 			auto temp = print_me;
 			if (temp - (int)temp == 0) {
-				fprintf(os, "%d", (int)print_me);
+				return fprintf(os, "%d", (int)print_me);
 			}
 			else {
-				fprintf(os, "%f", print_me);
+				return fprintf(os, "%f", print_me);
 
 			}
 		}
-#ifndef WIN32
-
+#ifndef WIN
 		auto PrintColor(const char * print_me, int color, int BGcolor = 0) {
 			int ret_val = 0; 
 			ret_val += fprintf(this->os, "%s%dm %s%d%sm", color_code_start, BGcolor, color_code_start, color, b);
@@ -96,7 +88,6 @@ namespace Skele_lib {
 		}
 		auto PrintColor(const float print_me, int color, int BGcolor = 0) {
 			char b[3] = { 0 };
-			if (bright) { b[0] = ';'; b[1] = '1'; b[2] = 0; }
 			fprintf(this->os, "%s%dm %s%d%sm", color_code_start, BGcolor, color_code_start, color, b);
 			if (print_me - (int)print_me == 0) {
 				//printf("%f",print_me); 
@@ -108,60 +99,60 @@ namespace Skele_lib {
 			return fprintf(this->os, "%s%dm", color_code_start, 0)
 		}
 		auto Inform(const char* print_me, bool bright) {
-			int clr = skele_lib::Console::FG_colors::Blue;
+			int clr = (int)Skele_lib::Console::BG_colors::BLUE;
 			if (bright) {
 				clr += 60;
 			}
-			return printColor(print_me, clr);
+			return PrintColor(print_me, clr);
 		}
 		auto Inform(const float print_me, bool bright) {
-			int clr = skele_lib::Console::FG_colors::Blue;
+			int clr = (int)Skele_lib::Console::FG_colors::BLUE;
 			if (bright) {
 				clr += 60;
 			}
-			return printColor(print_me, clr);
+			return PrintColor(print_me, clr);
 		}
 		auto Ok(const char* print_me, bool bright) {
-			int clr = skele_lib::Console::FG_colors::GREEN;
+			int clr = (int)Skele_lib::Console::FG_colors::GREEN;
 			if (bright) {
 				clr += 60;
 			}
-			return printColor(print_me, clr);
+			return PrintColor(print_me, clr);
 		}
 		auto Ok(const float print_me, bool bright) {
-			int clr = skele_lib::Console::FG_colors::GREEN;
+			int clr = (int)Skele_lib::Console::FG_colors::GREEN;
 			if (bright) {
 				clr += 60;
 			}
-			return printColor(print_me, clr);
+			return PrintColor(print_me, clr);
 		}
 		auto Warn(const char* print_me, bool bright = false) {
-			int clr = skele_lib::Console::FG_colors::YELLOW;
+			int clr = (int)Skele_lib::Console::FG_colors::YELLOW;
 			if (bright) {
 				clr += 60;
 			}
-			return printColor(print_me, clr);
+			return PrintColor(print_me, clr);
 		}
 		auto Warn(const float print_me, bool bright = false) {
-			int clr = skele_lib::Console::FG_colors::YELLOW;
+			int clr = (int)Skele_lib::Console::FG_colors::YELLOW;
 			if (bright) {
 				clr += 60;
 			}
-			return printColor(print_me, clr);
+			return PrintColor(print_me, clr);
 		}
 		auto Error(const char* print_me, bool bright = false) {
-			int clr = skele_lib::Console::FG_colors::RED;
+			int clr = (int)Skele_lib::Console::FG_colors::RED;
 			if (bright) {
 				clr += 60;
 			}
-			return printColor(print_me, clr);
+			return PrintColor(print_me, clr);
 		}
 		auto Error(const float print_me, bool bright = false) {
-			int clr = skele_lib::Console::FG_colors::RED;
+			int clr = (int)Skele_lib::Console::FG_colors::RED;
 			if (bright) {
 				clr += 60;
 			}
-			return printColor(print_me, clr);
+			return PrintColor(print_me, clr);
 		}
 	}
 
@@ -233,14 +224,14 @@ namespace Skele_lib {
 			Console(FILE* _os = stdout, FILE* _is = stdin) {
 				os = _os;
 				is = _is;
-#ifdef WIN32
+#ifdef WIN
 				this->ok_color     = Skele_lib::Console::Color(14, 02); 
 				this->inform_color = Skele_lib::Console::Color(11, 01); 
 				this->warn_color   = Skele_lib::Console::Color(07, 06); 
 				this->error_color  = Skele_lib::Console::Color(07, 04); 
 				hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 #else
-				this->warn_color  = Skele_lib::Console::Color(skele_lib::Console::FG_colors::YELLOW, skele_lib::Console::BG_colors::BLACK);
+				this->warn_color  = Skele_lib::Console::Color(Skele_lib::Console::BG_colors::YELLOW, skele_lib::Console::BG_colors::BLACK);
 				this->error_color = Skele_lib::Console::Color(skele_lib::Console::FG_colors::RED,    skele_lib::Console::BG_colors::BLACK);
 #endif // WIN32
 
