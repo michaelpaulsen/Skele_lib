@@ -29,14 +29,6 @@ size_t ccptocp(const char* source, char* dest, size_t max_bytes) {
 	}
 	return x;
 }
-size_t ccptocp(const char* source, char* dest, size_t max_bytes) {
-	size_t x;
-	for (x = 0; x < max_bytes; x++) {
-		dest[x] = source[x];
-		if (source[x] == 0) break;
-	}
-	return x; 
-}
 bool cp_contains(char* source, const char* comp, size_t max_bytes) {
 	bool found; 
 	for (size_t x = 0; x < max_bytes; x++) {

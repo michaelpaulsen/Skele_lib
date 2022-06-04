@@ -4,6 +4,11 @@
 #include <conio.h>
 namespace Skele_lib {
 	namespace Utils {
+		void ask(std::string prompt, std::string& out) {
+			std::cout << prompt << " \n";
+			std::getline(std::cin, out, '\n');
+			std::cout << '\n';
+		}
 		int getNthdigit(int in, int pow) {
 			return (in % pow) / (pow / 10);
 		}
