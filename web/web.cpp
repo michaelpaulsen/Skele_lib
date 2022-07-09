@@ -1,3 +1,6 @@
+#ifndef SKELE_WEB_LIB
+#define SKELE_WEB_LIB
+
 #include <string> 
 #include <iostream> 
 
@@ -23,3 +26,4 @@ namespace Skele_lib {
 		}
 	}
 }
+#endif
