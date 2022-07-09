@@ -6,7 +6,7 @@
 namespace Skele_lib {
 	namespace Console {
 		struct Console : public ConsoleBase {
-			Console(FILE* _is, FILE* _os) {
+			Console(FILE* _is = stdin, FILE* _os = stdout) {
 				os = _os;
 				is = _is;
 				this->ok_color = Skele_lib::Console::Color(14, 02);
