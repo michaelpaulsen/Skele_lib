@@ -49,6 +49,20 @@ namespace Skele_lib {
 				SetConsoleTextAttribute(this->hConsole, x);
 				return ret_val;
 			}
+			int PrintNumebrAsHex(long print_me)override {
+				return ret_val = fprintf(this->os, "%08x ", print_me & 0xff);
+			}
+			int PrintCharAsHex(char print_me) override {
+				int c = 0x02;
+				if (!print_me) c = 0x04;
+				short x;
+				this->GetColor(x);
+				SetConsoleTextAttribute(this->hConsole, c);
+				auto ret_val = fprintf(this->os, "%02x ", print_me&0xff);
+				SetConsoleTextAttribute(this->hConsole, x);
+				return ret_val;
+			};
+			
 		};
 	}
 }

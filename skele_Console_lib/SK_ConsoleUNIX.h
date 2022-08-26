@@ -14,6 +14,12 @@ namespace Skele_lib {
 					skele_lib::Console::FG_colors::RED,
 					Skele_lib::Console::FG_colors::BLACK);
 			}
+			int PrintCharAsHex(char print_me)override {
+				return 0; 
+			}
+			int PrintNumebrAsHex(long print_me)override {
+				return 0;
+			}
 			int PrintColor(const char* print_me, int color, int BG_color = 0) override {
 				int ret_val = fprintf(this->os, "%s%d;%dm%s", color_code_start, BG_color, color, print_me);
 

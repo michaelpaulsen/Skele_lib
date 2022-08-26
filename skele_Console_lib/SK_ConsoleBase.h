@@ -16,6 +16,8 @@ namespace Skele_lib {
 			Color  error_color;
 			virtual int PrintColor(const char* print_me, int color, int BG_color) = 0;
 			virtual int PrintColor(float print_me, int color, int BG_color) = 0;
+			virtual int PrintCharAsHex(char print_me) = 0;
+			virtual int PrintnumebrAsHex(long print_me) = 0;
 			int Print(const char* print_me) { return fprintf(os, "%s", print_me); }
 			int Print(const float print_me) {
 				auto temp = print_me;
