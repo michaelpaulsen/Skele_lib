@@ -2,7 +2,7 @@
 #define SK_CONSOLE
 #ifdef  WIN
 #include "SK_ConsoleWIN.h"
-#elif
+#else
 #include "SK_ConsoleUNIX.h"
 #endif 
 #endif 
