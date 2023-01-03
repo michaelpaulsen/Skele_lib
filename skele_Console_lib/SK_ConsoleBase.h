@@ -6,7 +6,7 @@
 #include <string>
 #include <stdint.h>
 #include "SK_Color.h"
-#define stocs(t) t.c_str() 
+
 /*this is a helper to make using string objects eiser*/
 namespace Skele_lib {
 	namespace Console {
