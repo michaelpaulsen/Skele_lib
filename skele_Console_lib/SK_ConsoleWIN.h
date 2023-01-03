@@ -1,7 +1,8 @@
 #ifndef SK_CONSOLE_CLASS_WIN 
 #define SK_CONSOLE_CLASS_WIN 
+#define use_va_list(t) va_list valist; va_start(valist, fmnt); t va_end(valist)
+
 #include "./SK_ConsoleBase.h"
-#include <stdarg.h>
 #include <windows.h>
 
 namespace Skele_lib {
@@ -91,7 +92,7 @@ namespace Skele_lib {
 				);
 				return retval;
 			};
-			int Print(int fgc, int bgc, const char* fmnt, ...)override {
+			int Print(int fgc, int bgc, std::string fmnt, ...)override {
 				int c = (16 * bgc) + fgc;
 				use_va_list(
 					auto retval = printformmated(c, stocs(fmnt), valist);
