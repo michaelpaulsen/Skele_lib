@@ -30,86 +30,76 @@ namespace Skele_lib {
 				this->error_color = Color((int)FG_colors::RED,   (int)BG_colors::BLACK);
 			}
 			int Log(const char* fmnt, ...)  override{
-				va_list args; 
-				va_start(args, fmnt);
-				int ret_val = fprintf( os, "%s%dm", color_code_start, inform_color.fgc);
-				ret_val += vfprintf(os, fmnt, args);
-				ret_val += fprintf(os, "%s", reset_code);
-				va_end(args); 
+				use_va_list(
+					int ret_val = fprintf( os, "%s%dm", color_code_start, inform_color.fgc);
+					ret_val += vfprintf(os, fmnt, args);
+					ret_val += fprintf(os, "%s", reset_code);
+				); 
 				return ret_val; 
 			}
 			int Warn(const char* fmnt, ...) override{
-				va_list args;
-				va_start(args, fmnt);
-				int ret_val = fprintf(os, "%s%dm", color_code_start, warn_color.fgc);
-				ret_val +=vfprintf(os, fmnt, args);
-				va_end(args);
+				use_va_list(
+					int ret_val = fprintf(os, "%s%dm", color_code_start, warn_color.fgc);
+					ret_val += vfprintf(os, fmnt, args);
+				);
 				return ret_val; 
 			}
 			int OK(const char* fmnt, ...)   override{
-				va_list args;
-				va_start(args, fmnt);
-				int ret_val = fprintf(os, "%s%dm", color_code_start, ok_color.fgc);
-				ret_val +=vfprintf(os, fmnt, args);
-				va_end(args);
+				use_va_list(
+					int ret_val = fprintf(os, "%s%dm", color_code_start, ok_color.fgc);
+					ret_val +=vfprintf(os, fmnt, args);
+				);
 				return ret_val; 
 			}
 			int Error(const char* fmnt, ...)override{
-				va_list args;
-				va_start(args, fmnt);
-				int ret_val = fprintf(os, "%s%dm", color_code_start, error_color.fgc);
-				ret_val += vfprintf(os, fmnt, args);
-				va_end(args);
+				use_va_list(
+					int ret_val = fprintf(os, "%s%dm", color_code_start, error_color.fgc);
+					ret_val += vfprintf(os, fmnt, args);
+				);
 				return ret_val; 
 			}
 			int Print(int fgc, int bgc, const char* fmnt, ...)override {
-				va_list args;
-				va_start(args, fmnt);
-				int ret_val = fprintf(os, "%s%d;%dm", color_code_start, fgc,bgc);
-				ret_val += vfprintf(os, fmnt, args);
-				va_end(args);
+				use_va_list(
+					int ret_val = fprintf(os, "%s%d;%dm", color_code_start, fgc,bgc);
+					ret_val += vfprintf(os, fmnt, args);
+				);
 				return ret_val;
 			};
 			int Log  (std::string fmnt, ...)  override {
-				va_list args;
-				va_start(args, fmnt);
-				int ret_val = fprintf(os, "%s%dm", color_code_start, inform_color.fgc);
-				ret_val += vfprintf(os, stocs(fmnt), args);
-				ret_val += fprintf(os, "%s", reset_code);
-				va_end(args);
+				use_va_list(
+					int ret_val = fprintf(os, "%s%dm", color_code_start, inform_color.fgc);
+					ret_val += vfprintf(os, stocs(fmnt), args);
+					ret_val += fprintf(os, "%s", reset_code);
+				);
 				return ret_val;
 			}
 			int Warn (std::string fmnt, ...) override {
-				va_list args;
-				va_start(args, fmnt);
-				int ret_val = fprintf(os, "%s%dm", color_code_start, warn_color.fgc);
-				ret_val += vfprintf(os, stocs(fmnt), args);
-				va_end(args);
+				use_va_list(
+					int ret_val = fprintf(os, "%s%dm", color_code_start, warn_color.fgc);
+					ret_val += vfprintf(os, stocs(fmnt), args);
+				);
 				return ret_val;
 			}
 			int OK   (std::string fmnt, ...)   override {
-				va_list args;
-				va_start(args, fmnt);
-				int ret_val = fprintf(os, "%s%dm", color_code_start, ok_color.fgc);
-				ret_val += vfprintf(os, stocs(fmnt), args);
-				va_end(args);
+				use_va_list(
+					int ret_val = fprintf(os, "%s%dm", color_code_start, ok_color.fgc);
+					ret_val += vfprintf(os, stocs(fmnt), args);
+				);
 				return ret_val;
 			}
 			int Error(std::string fmnt, ...)override {
-				va_list args;
-				va_start(args, fmnt);
+				use_va_list(
 				int ret_val = fprintf(os, "%s%dm", color_code_start, error_color.fgc);
 				ret_val += vfprintf(os, stocs(fmnt), args);
-				va_end(args);
+				)
 				return ret_val;
 			}
-			int Print(int fgc, int bgc, const char* fmnt, ...)override {
-				va_list args;
-				va_start(args, fmnt);
-				int ret_val = fprintf(os, "%s%d;%dm", color_code_start, fgc, bgc);
-				ret_val += vfprintf(os, stocs(fmnt), args);
-				va_end(args);
-				return ret_val;
+			int Print(int fgc, int bgc,std::string fmnt, ...)override {
+				use_va_list(
+					int ret_val = fprintf(os, "%s%d;%dm", color_code_start, fgc, bgc);
+					ret_val += vfprintf(os, stocs(fmnt), args);
+					);
+					return ret_val;
 			};
 			int vPrintEX(PRINTEX_FLAGS flags, int fgc, int bgc, const char* msg, va_list valist) {
 				int retval = fprintf(os, "%s", color_code_start);
@@ -130,12 +120,14 @@ namespace Skele_lib {
 				return retval;
 			}
 			int PrintEX(PRINTEX_FLAGS flags, int fgc, int bgc, const char* fmnt, ...) {
-				va_list valist; 
-				va_start(valist, fmnt); 
-				return vPrintEX(flags, fgc, bgc, fmnt, valist);
+				use_va_list(
+					return vPrintEX(flags, fgc, bgc, fmnt, valist);
+				);
 			}
-			int PrintEX(PRINTEX_FLAGS flags, std::string fmnt, ...) {
-				return vPrintEX(flags, fgc, bgc, stocs(fmnt), valist);
+			int PrintEX(PRINTEX_FLAGS flags, int fgc, int bgc, std::string fmnt, .. ) {
+				use_va_list(
+					return vPrintEX(flags, fgc, bgc, fmnt, valist);
+				); 
 			}
 
 			int EndLine() {
