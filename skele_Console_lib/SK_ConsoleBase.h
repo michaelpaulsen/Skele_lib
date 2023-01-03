@@ -6,6 +6,8 @@
 #include <string>
 #include <stdint.h>
 #include "SK_Color.h"
+#define stocs(t) t.c_str() 
+/*this is a helper to make using string objects eiser*/
 namespace Skele_lib {
 	namespace Console {
 		struct ConsoleBase {
@@ -19,7 +21,12 @@ namespace Skele_lib {
 			virtual int Warn(const char* fmnt, ...) = 0;
 			virtual int OK(const char* fmnt, ...) = 0;
 			virtual int Error(const char* fmnt, ...) = 0;
-			virtual int Print(const char* fmnt, int fgc, int bgc, ...) = 0;
+			virtual int Print(int fgc, int bgc, const char* fmnt, ...) = 0;
+			virtual int Log  (std::string fmnt, ...) = 0;
+			virtual int Warn (std::string fmnt, ...) = 0;
+			virtual int OK   (std::string fmnt, ...) = 0;
+			virtual int Error(std::string fmnt, ...) = 0;
+			virtual int Print(int fgc, int bgc, std::string fmnt, ...) = 0;
 		};
 	}
 }

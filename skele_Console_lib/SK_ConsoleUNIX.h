@@ -34,7 +34,7 @@ namespace Skele_lib {
 				va_start(args, fmnt);
 				int ret_val = fprintf( os, "%s%dm", color_code_start, inform_color.fgc);
 				ret_val += vfprintf(os, fmnt, args);
-				ret_val += fprintf(os, reset_code);
+				ret_val += fprintf(os, "%s", reset_code);
 				va_end(args); 
 				return ret_val; 
 			}
@@ -62,11 +62,52 @@ namespace Skele_lib {
 				va_end(args);
 				return ret_val; 
 			}
-			int Print(const char* fmnt, int fgc, int bgc, ...)override {
+			int Print(int fgc, int bgc, const char* fmnt, ...)override {
 				va_list args;
 				va_start(args, fmnt);
 				int ret_val = fprintf(os, "%s%d;%dm", color_code_start, fgc,bgc);
 				ret_val += vfprintf(os, fmnt, args);
+				va_end(args);
+				return ret_val;
+			};
+			int Log  (std::string fmnt, ...)  override {
+				va_list args;
+				va_start(args, fmnt);
+				int ret_val = fprintf(os, "%s%dm", color_code_start, inform_color.fgc);
+				ret_val += vfprintf(os, stocs(fmnt), args);
+				ret_val += fprintf(os, "%s", reset_code);
+				va_end(args);
+				return ret_val;
+			}
+			int Warn (std::string fmnt, ...) override {
+				va_list args;
+				va_start(args, fmnt);
+				int ret_val = fprintf(os, "%s%dm", color_code_start, warn_color.fgc);
+				ret_val += vfprintf(os, stocs(fmnt), args);
+				va_end(args);
+				return ret_val;
+			}
+			int OK   (std::string fmnt, ...)   override {
+				va_list args;
+				va_start(args, fmnt);
+				int ret_val = fprintf(os, "%s%dm", color_code_start, ok_color.fgc);
+				ret_val += vfprintf(os, stocs(fmnt), args);
+				va_end(args);
+				return ret_val;
+			}
+			int Error(std::string fmnt, ...)override {
+				va_list args;
+				va_start(args, fmnt);
+				int ret_val = fprintf(os, "%s%dm", color_code_start, error_color.fgc);
+				ret_val += vfprintf(os, stocs(fmnt), args);
+				va_end(args);
+				return ret_val;
+			}
+			int Print(int fgc, int bgc, const char* fmnt, ...)override {
+				va_list args;
+				va_start(args, fmnt);
+				int ret_val = fprintf(os, "%s%d;%dm", color_code_start, fgc, bgc);
+				ret_val += vfprintf(os, stocs(fmnt), args);
 				va_end(args);
 				return ret_val;
 			};
@@ -93,6 +134,10 @@ namespace Skele_lib {
 				va_start(valist, fmnt); 
 				return vPrintEX(flags, fgc, bgc, fmnt, valist);
 			}
+			int PrintEX(PRINTEX_FLAGS flags, std::string fmnt, ...) {
+				return vPrintEX(flags, fgc, bgc, stocs(fmnt), valist);
+			}
+
 			int EndLine() {
 				return fprintf(os, "%s\n", reset_code);
 			}

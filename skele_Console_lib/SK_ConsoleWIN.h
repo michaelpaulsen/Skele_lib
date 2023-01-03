@@ -34,7 +34,6 @@ namespace Skele_lib {
 				return retval;
 
 			};
-
 			int Warn(const char* fmnt, ...)override {
 				int c = (16 * warn_color.bgc) + error_color.fgc;
 				va_list valist;
@@ -43,7 +42,6 @@ namespace Skele_lib {
 				va_end(valist);
 				return retval;
 			};
-
 			int OK(const char* fmnt, ...)override {
 				int c = (16 * ok_color.bgc) + error_color.fgc;
 				va_list valist;
@@ -52,7 +50,6 @@ namespace Skele_lib {
 				va_end(valist);
 				return retval;
 			};
-
 			int Error(const char* fmnt, ...)override {
 				int c = (16 * error_color.bgc) + error_color.fgc;
 				va_list valist;
@@ -61,12 +58,53 @@ namespace Skele_lib {
 				va_end(valist);
 				return retval;
 			};
-
-			int Print(const char* fmnt, int fgc, int bgc, ...)override {
+			int Print(int fgc, int bgc, const char* fmnt, ...)override {
 				int c = (16 * bgc) + fgc;
 				va_list valist;
 				va_start(valist, fmnt);
 				auto retval = printformmated(c, fmnt, valist);
+				va_end(valist);
+				return retval;
+			};	
+			
+			int Log  (std::string fmnt, ...)override {
+				int c = (16 * inform_color.bgc) + error_color.fgc;
+				va_list valist;
+				va_start(valist, fmnt);
+				auto retval = printformmated(c, stocs(fmnt), valist);
+				va_end(valist);
+				return retval;
+
+			};
+			int Warn (std::string fmnt, ...)override {
+				int c = (16 * warn_color.bgc) + error_color.fgc;
+				va_list valist;
+				va_start(valist, fmnt);
+				auto retval = printformmated(c, stocs(fmnt), valist);
+				va_end(valist);
+				return retval;
+			};
+			int OK   (std::string fmnt, ...)override {
+				int c = (16 * ok_color.bgc) + error_color.fgc;
+				va_list valist;
+				va_start(valist, fmnt);
+				auto retval = printformmated(c, stocs(fmnt), valist);
+				va_end(valist);
+				return retval;
+			};
+			int Error(std::string fmnt, ...)override {
+				int c = (16 * error_color.bgc) + error_color.fgc;
+				va_list valist;
+				va_start(valist, fmnt);
+				auto retval = printformmated(c, stocs(fmnt), valist);
+				va_end(valist);
+				return retval;
+			};
+			int Print(int fgc, int bgc, const char* fmnt, ...)override {
+				int c = (16 * bgc) + fgc;
+				va_list valist;
+				va_start(valist, fmnt);
+				auto retval = printformmated(c, stocs(fmnt), valist);
 				va_end(valist);
 				return retval;
 			};
