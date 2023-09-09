@@ -13,8 +13,13 @@ namespace SKC::Console {
 		void    Error() {}
 		void    Print() {}
 		void   Inform() {}
-		
-		SKC_consoleVA void Print(printType msg1, printTypes... msg2);
+		void     Okln() {}
+		void   Warnln() {}
+		void  Errorln() {}
+		void  Println() {}
+		void Informln() {}
+
+
 		void SetFGColor(int color);
 		void SetBGColor(int color);
 		void SetFGColor(int r, int g, int b);
@@ -24,14 +29,21 @@ namespace SKC::Console {
 		void Hide(); 
 		void Blink(); 
 		void Move(int x, int y); 
+		SKC_consoleVA void Print(printType msg1, printTypes... msg2);
+		SKC_consoleVA void Println(printType msg1, printTypes... msg2);
 		SKC_consoleVA void Ok(printType msg, printTypes ...msgs);
 		SKC_consoleVA void Inform(printType msg, printTypes ...msgs);
 		SKC_consoleVA void Warn(printType msg, printTypes ...msgs);
 		SKC_consoleVA void Error(printType msg, printTypes ...msgs);
+		SKC_consoleVA void Okln(printType msg, printTypes ...msgs);
+		SKC_consoleVA void Informln(printType msg, printTypes ...msgs);
+		SKC_consoleVA void Warnln (printType msg, printTypes ...msgs);
+		SKC_consoleVA void Errorln(printType msg, printTypes ...msgs);
 		SKC_consoleVA void ErrorAndDie(int exitcode, printType msg, printTypes ...msgs);
 	private:
 		static inline char esc = 27; 
 	};
+	
 	void Console::SetFGColor(int color) {
 		printf("%c[38;5;%dm", esc, color); 
 	};
@@ -87,6 +99,33 @@ namespace SKC::Console {
 		SetFGColor(255, 0, 0);
 		Print(msg1, msg2...);
 	}
+
+	SKC_consoleVA void Console::Println(printType msg1, printTypes... msg2) {
+		Print(msg1, msg2..., '\n');
+	}
+	SKC_consoleVA void Console::Okln(printType msg1, printTypes... msg2) {
+		Ok(msg1, msg2...);
+		Reset();
+		Print('\n');
+	}
+	SKC_consoleVA void Console::Informln (printType msg1, printTypes... msg2) {
+		Inform(msg1, msg2...);
+		Reset();
+		Print('\n');
+	}
+	SKC_consoleVA void Console::Warnln(printType msg1, printTypes... msg2) {
+		Warn(msg1, msg2...);
+		Reset();
+		Print('\n');
+	}
+	SKC_consoleVA void Console::Errorln(printType msg1, printTypes... msg2) {
+		Error(msg1, msg2...);
+		Reset();
+		Print('\n');
+	}
+	
+	
+	
 	SKC_consoleVA void Console::ErrorAndDie(int exitcode, printType msg1, printTypes... msg2) {
 		Error(msg1,msg2...);
 		Reset();
