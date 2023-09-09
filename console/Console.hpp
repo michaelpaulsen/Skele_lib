@@ -1,5 +1,7 @@
 #pragma once
 #include <iostream>
+#include <string>
+#include <sstream>
 #define SKC_consoleVA template<typename printType, typename... printTypes>
 
 namespace SKC::Console {
@@ -25,6 +27,13 @@ namespace SKC::Console {
 		void SetFGColor(int r, int g, int b);
 		void SetBGColor(int r, int g, int b);
 		void Reset(); 
+		
+		auto SetFGColor_s(int color);
+		auto SetBGColor_s(int color);
+		auto SetFGColor_s(int r, int g, int b);
+		auto SetBGColor_s(int r, int g, int b);
+		auto Reset_s();
+
 		void Clear(); 
 		void Hide(); 
 		void Blink(); 
@@ -60,6 +69,35 @@ namespace SKC::Console {
 		printf("%c[48;2;%d;%d;%dm", esc, r, g, b);
 
 	}
+	
+	auto Console::SetFGColor_s(int color) {
+		std::stringstream str;
+		str << esc << "[38;5;" << color << 'm';
+		return str.str(); 
+	};
+	auto Console::SetBGColor_s(int color) {
+		std::stringstream str;
+		str << esc << "[48;5;" << color << 'm';
+		return str.str();
+	};
+	auto Console::SetFGColor_s(int r, int g, int b) {
+		//printf("%c[38;2;%d;%d;%dm", esc, r, g, b);
+		std::stringstream str;
+		str << esc << "[38;2;" << r << ';'<< g << ';'<< b << 'm';
+		return str.str();
+	};
+	auto Console::SetBGColor_s(int r, int g, int b) {
+		std::stringstream str;
+		str << esc << "[48;2;" << r << ';' << g << ';' << b << 'm';
+		return str.str();
+	 };
+	auto Console::Reset_s() {
+		std::stringstream str;
+		str << esc << "["<< 0 << 'm';
+		return str.str();
+	 };
+
+	
 	void Console::Reset() {
 		printf("%c[%cm", esc,0);
 	}
@@ -123,9 +161,6 @@ namespace SKC::Console {
 		Reset();
 		Print('\n');
 	}
-	
-	
-	
 	SKC_consoleVA void Console::ErrorAndDie(int exitcode, printType msg1, printTypes... msg2) {
 		Error(msg1,msg2...);
 		Reset();
