@@ -1,6 +1,7 @@
 #pragma once
-//import std; 
-#include <iostream> 
+#include <iostream>
+#define SKC_consoleVA template<typename printType, typename... printTypes>
+
 namespace SKC::Console {
 	class Console
 	{
@@ -13,8 +14,7 @@ namespace SKC::Console {
 		void    Print() {}
 		void   Inform() {}
 		
-		template<typename printType, typename... printTypes>
-		void Print(printType msg1, printTypes... msg2);
+		SKC_consoleVA void Print(printType msg1, printTypes... msg2);
 		void SetFGColor(int color);
 		void SetBGColor(int color);
 		void SetFGColor(int r, int g, int b);
@@ -24,24 +24,11 @@ namespace SKC::Console {
 		void Hide(); 
 		void Blink(); 
 		void Move(int x, int y); 
-		template<typename printType, typename... printTypes>
-		void Ok(printType msg, printTypes ...msgs);
-		template<typename printType, typename... printTypes>
-		void Inform(printType msg, printTypes ...msgs);
-		template<typename printType, typename... printTypes>
-		void Warn(printType msg, printTypes ...msgs);
-		template<typename printType, typename... printTypes>
-		void Error(printType msg, printTypes ...msgs);
-		template<typename printType, typename... printTypes>
-		void Okln(printType msg, printTypes ...msgs);
-		template<typename printType, typename... printTypes>
-		void Informln(printType msg, printTypes ...msgs);
-		template<typename printType, typename... printTypes>
-		void Warnln (printType msg, printTypes ...msgs);
-		template<typename printType, typename... printTypes>
-		void Errorln(printType msg, printTypes ...msgs);
-		template<typename printType, typename... printTypes>
-		void ErrorAndDie(int exitcode, printType msg, printTypes ...msgs);
+		SKC_consoleVA void Ok(printType msg, printTypes ...msgs);
+		SKC_consoleVA void Inform(printType msg, printTypes ...msgs);
+		SKC_consoleVA void Warn(printType msg, printTypes ...msgs);
+		SKC_consoleVA void Error(printType msg, printTypes ...msgs);
+		SKC_consoleVA void ErrorAndDie(int exitcode, printType msg, printTypes ...msgs);
 	private:
 		static inline char esc = 27; 
 	};
@@ -83,37 +70,31 @@ namespace SKC::Console {
 	void Console::Move(int x, int y) {
 		printf("%c[%d;%dH", esc, x, y);
 	}
-	template<typename printType, typename... printTypes>
-	void Console::Print(printType msg1, printTypes... msg2) {
+	SKC_consoleVA void Console::Print(printType msg1, printTypes... msg2) {
 		std::cout << msg1;
 		Print(msg2...);
 	}
-	template<typename printType, typename... printTypes>
-	void Console::Ok(printType msg1, printTypes... msg2) {
+	SKC_consoleVA void Console::Ok(printType msg1, printTypes... msg2) {
 		SetFGColor(0,255,0); 
 		SetBGColor(25,100,25);
 		Print(msg1, msg2...);
 	}
-	template<typename printType, typename... printTypes>
-	void Console::Inform(printType msg1, printTypes... msg2) {
+	SKC_consoleVA void Console::Inform(printType msg1, printTypes... msg2) {
 		SetBGColor(100,100,255); 
 		SetFGColor(0,0,200);
 		Print(msg1, msg2...);
 	}
-	template<typename printType, typename... printTypes>
-	void Console::Warn(printType msg1, printTypes... msg2) {
+	SKC_consoleVA void Console::Warn(printType msg1, printTypes... msg2) {
 		SetBGColor(200,100,0); 
 		SetFGColor(100, 50, 0);
 		Print(msg1, msg2...);
 	}
-	template<typename printType, typename... printTypes>
-	void Console::Error(printType msg1, printTypes... msg2) {
+	SKC_consoleVA void Console::Error(printType msg1, printTypes... msg2) {
 		SetBGColor(255,100,100); 
 		SetFGColor(255, 0, 0);
 		Print(msg1, msg2...);
 	}
-	template<typename printType, typename... printTypes>
-	void Console::ErrorAndDie(int exitcode, printType msg1, printTypes... msg2) {
+	SKC_consoleVA void Console::ErrorAndDie(int exitcode, printType msg1, printTypes... msg2) {
 		Error(msg1,msg2...);
 		Reset();
 		exit(exitcode);
