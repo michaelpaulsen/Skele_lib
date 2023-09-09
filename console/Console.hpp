@@ -12,10 +12,10 @@ namespace SKC::Console {
 		~Console() = default;
 		void       Ok() {}
 		void     Warn() {}
+		void     Okln() {}
 		void    Error() {}
 		void    Print() {}
 		void   Inform() {}
-		void     Okln() {}
 		void   Warnln() {}
 		void  Errorln() {}
 		void  Println() {}
@@ -27,16 +27,17 @@ namespace SKC::Console {
 		void SetFGColor(int r, int g, int b);
 		void SetBGColor(int r, int g, int b);
 		void Reset(); 
+		void Blink(); 
 		
 		auto SetFGColor_s(int color);
 		auto SetBGColor_s(int color);
 		auto SetFGColor_s(int r, int g, int b);
 		auto SetBGColor_s(int r, int g, int b);
 		auto Reset_s();
+		auto Blink_s(); 
 
 		void Clear(); 
 		void Hide(); 
-		void Blink(); 
 		void Move(int x, int y); 
 		SKC_consoleVA void Print(printType msg1, printTypes... msg2);
 		SKC_consoleVA void Println(printType msg1, printTypes... msg2);
@@ -56,20 +57,27 @@ namespace SKC::Console {
 	void Console::SetFGColor(int color) {
 		printf("%c[38;5;%dm", esc, color); 
 	};
+	void Console::SetFGColor(int r, int g, int b) {
+		printf("%c[38;2;%d;%d;%dm", esc, r, g, b);
+
+	}
 	void Console::SetBGColor(int color) {
 		printf("%c[48;5;%dm", esc, color);
 
 
 	};
-	void Console::SetFGColor(int r, int g, int b) {
-		printf("%c[38;2;%d;%d;%dm", esc, r, g, b);
-
-	}
 	void Console::SetBGColor(int r, int g, int b) {
 		printf("%c[48;2;%d;%d;%dm", esc, r, g, b);
 
 	}
 	
+	void Console::Reset() {
+		printf("%c[%cm", esc, 0);
+	}
+	void Console::Blink() {
+		printf("%c[%dm", esc, 5);
+	}
+
 	auto Console::SetFGColor_s(int color) {
 		std::stringstream str;
 		str << esc << "[38;5;" << color << 'm';
@@ -96,16 +104,16 @@ namespace SKC::Console {
 		str << esc << "["<< 0 << 'm';
 		return str.str();
 	 };
+	auto Console::Blink_s() {
+		std::stringstream str;
+		str << esc << "[" << 5 << 'm';
+		return str.str();
+		//
+	}
 
 	
-	void Console::Reset() {
-		printf("%c[%cm", esc,0);
-	}
 	void Console::Hide() {
 		printf("%c[%cm", esc,8);
-	}
-	void Console::Blink() {
-		printf("%c[%dm", esc,5);
 	}
 	void Console::Clear() {
 		printf("%cc",esc); 
