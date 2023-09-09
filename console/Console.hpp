@@ -6,8 +6,8 @@ namespace SKC::Console {
 	class Console
 	{
 	public:
-		Console();
-		~Console();
+		Console() = default;
+		~Console() = default;
 		void       Ok() {}
 		void     Warn() {}
 		void    Error() {}
@@ -32,15 +32,8 @@ namespace SKC::Console {
 	private:
 		static inline char esc = 27; 
 	};
-	Console::Console()
-	{
-	}
-	Console::~Console()
-	{
-	}
 	void Console::SetFGColor(int color) {
 		printf("%c[38;5;%dm", esc, color); 
-
 	};
 	void Console::SetBGColor(int color) {
 		printf("%c[48;5;%dm", esc, color);
