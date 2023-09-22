@@ -31,9 +31,38 @@ namespace SKC::Console {
 	};
 	class Console
 	{
+		static inline char esc = 27;
 	public:
-		Console() = default;
+		enum color_name_t {
+			error,
+			warn,
+			ok,
+			info,
+			max
+		};
+		Color BG_pallet[color_name_t::max];
+		Color FG_pallet[color_name_t::max];
+
+
+		Console() {
+			BG_pallet[error] = { 255,100,100 };
+			BG_pallet[warn]  = { 193,156,  0 };
+			BG_pallet[ok]    = { 100,255,100 };
+			BG_pallet[info]  = { 100,100,255 };
+			
+			FG_pallet[error] = { 170,  0,  0};
+			FG_pallet[warn]  = { 170, 85, 00};
+			FG_pallet[ok]    = { 050,100,050};
+			FG_pallet[info]  = { 050,050,100};
+		};
 		~Console() = default;
+		Console(Console&) = delete; 
+		Console(Console&&) = delete; 
+		void operator =(Console&) = delete;
+		void operator =(Console&&) = delete;
+		
+		
+		
 		void       Ok()const {}
 		void     Warn()const {}
 		void     Okln()const {}
@@ -57,19 +86,22 @@ namespace SKC::Console {
 		void Hide() const;
 		void Move(int x, int y) const;
 		
-		SKC_consoleVA void Print (printType msg1, printTypes... msg2) const;
-		SKC_consoleVA void Println(printType msg1, printTypes... msg2) const;
-		SKC_consoleVA void Ok(printType msg, printTypes ...msgs) const;
-		SKC_consoleVA void Inform(printType msg, printTypes ...msgs) const;
-		SKC_consoleVA void Warn(printType msg, printTypes ...msgs) const;
-		SKC_consoleVA void Error(printType msg, printTypes ...msgs) const;
-		SKC_consoleVA void Okln(printType msg, printTypes ...msgs) const;
-		SKC_consoleVA void Informln(printType msg, printTypes ...msgs) const;
-		SKC_consoleVA void Warnln (printType msg, printTypes ...msgs) const;
-		SKC_consoleVA void Errorln(printType msg, printTypes ...msgs) const;
-		SKC_consoleVA void ErrorAndDie(int exitcode, printType msg, printTypes ...msgs) const;
-	private:
-		static inline char esc = 27; 
+		SKC_consoleVA void Ok(printType msg, printTypes ...msgs);
+		SKC_consoleVA void Okln(printType msg, printTypes ...msgs);
+		
+		SKC_consoleVA void Warn(printType msg, printTypes ...msgs);
+		SKC_consoleVA void Warnln (printType msg, printTypes ...msgs);
+		
+		SKC_consoleVA void Print (printType msg1, printTypes... msg2);
+		SKC_consoleVA void Println(printType msg1, printTypes... msg2);
+		
+		SKC_consoleVA void Error(printType msg, printTypes ...msgs);
+		SKC_consoleVA void Errorln(printType msg, printTypes ...msgs);
+		
+		SKC_consoleVA void Inform(printType msg, printTypes ...msgs);
+		SKC_consoleVA void Informln(printType msg, printTypes ...msgs);
+		
+		SKC_consoleVA void ErrorAndDie(int exitcode, printType msg, printTypes ...msgs);
 	};
 	
 	auto Console::SetFGColor(color_t r, color_t g, color_t b)  {
@@ -98,66 +130,67 @@ namespace SKC::Console {
 		printf("%c[%dm", esc, 5);
 		return ""; 
 	}
-
-	void Console::Hide()const  {
+	void Console::Hide () const  {
 		printf("%c[%cm", esc,8);
 	}
 	void Console::Clear() const {
 		printf("%cc",esc); 
 	}
+
 	void Console::Move(int x, int y) const {
 		printf("%c[%d;%dH", esc, x, y);
 	}
 	
-	SKC_consoleVA void Console::Print(printType msg1, printTypes... msg2)const{
+	SKC_consoleVA void Console::Print(printType msg1, printTypes... msg2){
 		std::cout << msg1;
 		Print(msg2...);
 	}
-	SKC_consoleVA void Console::Ok(printType msg1, printTypes... msg2) const {
-		SetFGColor(0,255,0); 
-		SetBGColor(25,100,25);
+	SKC_consoleVA void Console::Println(printType msg1, printTypes... msg2) {
+		Print(msg1, msg2..., '\n');
+	}
+	
+	SKC_consoleVA void Console::Ok(printType msg1, printTypes... msg2) {
+		SetBGColor(BG_pallet[ok]);
+		SetFGColor(FG_pallet[ok]);
 		Print(msg1, msg2...);
 	}
-	SKC_consoleVA void Console::Inform(printType msg1, printTypes... msg2) const {
-		SetBGColor(100,100,255); 
-		SetFGColor(0,0,200);
+	SKC_consoleVA void Console::Inform(printType msg1, printTypes... msg2) {
+		SetBGColor(this->BG_pallet[info]);
+		SetFGColor(this->FG_pallet[info]);
 		Print(msg1, msg2...);
 	}
-	SKC_consoleVA void Console::Warn(printType msg1, printTypes... msg2) const {
-		SetBGColor(200,100,0); 
-		SetFGColor(100, 50, 0);
+	SKC_consoleVA void Console::Warn(printType msg1, printTypes... msg2) {
+		SetBGColor(this->BG_pallet[warn]);
+		SetFGColor(this->FG_pallet[warn]);
 		Print(msg1, msg2...);
 	}
-	SKC_consoleVA void Console::Error(printType msg1, printTypes... msg2) const {
-		SetBGColor(255,100,100); 
-		SetFGColor(255, 0, 0);
+	SKC_consoleVA void Console::Error(printType msg1, printTypes... msg2) {
+		SetBGColor(this->BG_pallet[error]);
+		SetFGColor(this->FG_pallet[error]);
 		Print(msg1, msg2...);
 	}
 
-	SKC_consoleVA void Console::Println(printType msg1, printTypes... msg2) const {
-		Print(msg1, msg2..., '\n');
-	}
-	SKC_consoleVA void Console::Okln(printType msg1, printTypes... msg2) const {
+	SKC_consoleVA void Console::Okln(printType msg1, printTypes... msg2)                       {
 		Ok(msg1, msg2...);
 		Reset();
 		Print('\n');
 	}
-	SKC_consoleVA void Console::Informln (printType msg1, printTypes... msg2) const {
+	SKC_consoleVA void Console::Informln (printType msg1, printTypes... msg2)                  {
 		Inform(msg1, msg2...);
 		Reset();
 		Print('\n');
 	}
-	SKC_consoleVA void Console::Warnln(printType msg1, printTypes... msg2) const {
+	SKC_consoleVA void Console::Warnln(printType msg1, printTypes... msg2)                     {
 		Warn(msg1, msg2...);
 		Reset();
 		Print('\n');
 	}
-	SKC_consoleVA void Console::Errorln(printType msg1, printTypes... msg2) const {
+	SKC_consoleVA void Console::Errorln(printType msg1, printTypes... msg2)                    {
 		Error(msg1, msg2...);
 		Reset();
 		Print('\n');
 	}
-	SKC_consoleVA void Console::ErrorAndDie(int exitcode, printType msg1, printTypes... msg2) const {
+	SKC_consoleVA void Console::ErrorAndDie(int exitcode, printType msg1, printTypes... msg2)  {
 		Error(msg1,msg2...);
 		Reset();
 		exit(exitcode);
