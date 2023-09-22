@@ -5,6 +5,30 @@
 #define SKC_consoleVA template<typename printType, typename... printTypes>
 
 namespace SKC::Console {
+	typedef unsigned char color_t;
+	struct Color {
+		color_t r, g, b;
+		Color() : r(255), g(255), b(255){}
+		Color(color_t _r, color_t _g, color_t _b): r(_r),g(_g),b(_b) {}
+		Color(Color& c) : r(c.r), g(c.g), b(c.b){}
+		Color(Color&& c) = default; 
+		void operator =(Color c) {
+			r = c.r;
+			b = c.b;
+			g = c.g;
+		}
+		auto toString() {
+			std::stringstream str; 
+			str << '#'; 
+			if (r < 0x10) { str << '0'; }
+			str << std::hex << static_cast<int>(r);
+			if (g < 0x10) { str << '0'; }
+			str << std::hex << static_cast<int>(g);
+			if (b < 0x10) { str << '0'; }
+			str << std::hex << static_cast<int>(b);
+			return str.str();
+		}
+	};
 	class Console
 	{
 	public:
