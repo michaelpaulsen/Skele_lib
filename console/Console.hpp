@@ -45,15 +45,18 @@ namespace SKC::Console {
 		void  Println()const {}
 		void Informln()const {}
 
-
 		auto SetFGColor(color_t r, color_t g, color_t b);
 		auto SetBGColor(color_t r, color_t g, color_t b);
+		auto SetFGColor(Color c);
+		auto SetBGColor(Color c);
+		
 		auto Reset() const;
 		auto Blink() const;
 
 		void Clear() const;
 		void Hide() const;
 		void Move(int x, int y) const;
+		
 		SKC_consoleVA void Print (printType msg1, printTypes... msg2) const;
 		SKC_consoleVA void Println(printType msg1, printTypes... msg2) const;
 		SKC_consoleVA void Ok(printType msg, printTypes ...msgs) const;
@@ -78,6 +81,15 @@ namespace SKC::Console {
 		return "";
 	}
 	
+	auto Console::SetFGColor(Color c)  {
+		printf("%c[38;2;%d;%d;%dm", esc, c.r, c.g, c.b);
+		return "";
+	}
+	auto Console::SetBGColor(Color c)  {
+		printf("%c[48;2;%d;%d;%dm", esc, c.r, c.g, c.b);
+		return "";
+	}
+	
 	auto Console::Reset() const {
 		printf("%c[%cm", esc, 0);
 		return "";
@@ -96,6 +108,7 @@ namespace SKC::Console {
 	void Console::Move(int x, int y) const {
 		printf("%c[%d;%dH", esc, x, y);
 	}
+	
 	SKC_consoleVA void Console::Print(printType msg1, printTypes... msg2)const{
 		std::cout << msg1;
 		Print(msg2...);
