@@ -46,8 +46,6 @@ namespace SKC::Console {
 		void Informln()const {}
 
 
-		auto SetFGColor(int color);
-		auto SetBGColor(int color);
 		auto SetFGColor(color_t r, color_t g, color_t b);
 		auto SetBGColor(color_t r, color_t g, color_t b);
 		auto Reset() const;
@@ -71,19 +69,10 @@ namespace SKC::Console {
 		static inline char esc = 27; 
 	};
 	
-	auto Console::SetFGColor(int color)            {
-		printf("%c[38;5;%dm", esc, color);
-		return "";
-	};
 	auto Console::SetFGColor(color_t r, color_t g, color_t b)  {
 		printf("%c[38;2;%d;%d;%dm", esc, r, g, b);
 		return "";
 	}
-	auto Console::SetBGColor(int color)            {
-		printf("%c[48;5;%dm", esc, color);
-		return ""; 
-
-	};
 	auto Console::SetBGColor(color_t r, color_t g, color_t b)  {
 		printf("%c[48;2;%d;%d;%dm", esc, r, g, b);
 		return "";
