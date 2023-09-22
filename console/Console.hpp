@@ -46,19 +46,12 @@ namespace SKC::Console {
 		void Informln()const {}
 
 
-		void SetFGColor(int color) const;
-		void SetBGColor(int color) const;
-		void SetFGColor(int r, int g, int b) const;
-		void SetBGColor(int r, int g, int b) const;
-		void Reset() const;
-		void Blink() const;
-		
-		auto SetFGColor_s(int color) const;
-		auto SetBGColor_s(int color) const;
-		auto SetFGColor_s(int r, int g, int b) const;
-		auto SetBGColor_s(int r, int g, int b) const;
-		auto Reset_s() const;
-		auto Blink_s() const;
+		auto SetFGColor(int color);
+		auto SetBGColor(int color);
+		auto SetFGColor(color_t r, color_t g, color_t b);
+		auto SetBGColor(color_t r, color_t g, color_t b);
+		auto Reset() const;
+		auto Blink() const;
 
 		void Clear() const;
 		void Hide() const;
@@ -78,64 +71,33 @@ namespace SKC::Console {
 		static inline char esc = 27; 
 	};
 	
-	void Console::SetFGColor(int color) const {
-		printf("%c[38;5;%dm", esc, color); 
+	auto Console::SetFGColor(int color)            {
+		printf("%c[38;5;%dm", esc, color);
+		return "";
 	};
-	void Console::SetFGColor(int r, int g, int b) const {
+	auto Console::SetFGColor(color_t r, color_t g, color_t b)  {
 		printf("%c[38;2;%d;%d;%dm", esc, r, g, b);
-
+		return "";
 	}
-	void Console::SetBGColor(int color) const {
+	auto Console::SetBGColor(int color)            {
 		printf("%c[48;5;%dm", esc, color);
-
+		return ""; 
 
 	};
-	void Console::SetBGColor(int r, int g, int b) const {
+	auto Console::SetBGColor(color_t r, color_t g, color_t b)  {
 		printf("%c[48;2;%d;%d;%dm", esc, r, g, b);
-
+		return "";
 	}
 	
-	void Console::Reset() const {
+	auto Console::Reset() const {
 		printf("%c[%cm", esc, 0);
+		return "";
 	}
-	void Console::Blink() const {
+	auto Console::Blink() const {
 		printf("%c[%dm", esc, 5);
+		return ""; 
 	}
 
-	auto Console::SetFGColor_s(int color) const {
-		std::stringstream str;
-		str << esc << "[38;5;" << color << 'm';
-		return str.str(); 
-	};
-	auto Console::SetBGColor_s(int color) const {
-		std::stringstream str;
-		str << esc << "[48;5;" << color << 'm';
-		return str.str();
-	};
-	auto Console::SetFGColor_s(int r, int g, int b) const {
-		//printf("%c[38;2;%d;%d;%dm", esc, r, g, b);
-		std::stringstream str;
-		str << esc << "[38;2;" << r << ';'<< g << ';'<< b << 'm';
-		return str.str();
-	};
-	auto Console::SetBGColor_s(int r, int g, int b) const {
-		std::stringstream str;
-		str << esc << "[48;2;" << r << ';' << g << ';' << b << 'm';
-		return str.str();
-	 };
-	auto Console::Reset_s() const {
-		std::stringstream str;
-		str << esc << "["<< 0 << 'm';
-		return str.str();
-	 };
-	auto Console::Blink_s() const {
-		std::stringstream str;
-		str << esc << "[" << 5 << 'm';
-		return str.str();
-		//
-	}
-
-	
 	void Console::Hide()const  {
 		printf("%c[%cm", esc,8);
 	}
