@@ -2,7 +2,8 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#define SKC_consoleVA template<typename printType, typename... printTypes>
+#include "../concepts.hpp"
+#define SKC_consoleVA template<concepts::printable printType, concepts::printable... printTypes>
 
 namespace SKC::Console {
 	typedef unsigned char color_t;
@@ -58,142 +59,180 @@ namespace SKC::Console {
 		~Console() = default;
 		Console(Console&) = delete; 
 		Console(Console&&) = delete; 
-		void operator =(Console&) = delete;
-		void operator =(Console&&) = delete;
+		void  operator =(Console&) = delete;
+		void  operator =(Console&&) = delete;
 		
 		
 		
-		void       Ok()const {}
-		void     Warn()const {}
-		void     Okln()const {}
-		void    Error()const {}
-		void    Print()const {}
-		void   Inform()const {}
-		void   Warnln()const {}
-		void  Errorln()const {}
-		void  Println()const {}
-		void Informln()const {}
+		auto&       Ok() {return *this;}
+		auto&     Warn() {return *this;}
+		auto&     Okln() {return *this;}
+		auto&    Error() {return *this;}
+		auto&    Print() {return *this;}
+		auto&   Inform() {return *this;}
+		auto&   Warnln() {return *this;}
+		auto&  Errorln() {return *this;}
+		auto&  Println() {return *this;}
+		auto& Informln() {return *this;}
 
-		auto SetFGColor(color_t r, color_t g, color_t b);
-		auto SetBGColor(color_t r, color_t g, color_t b);
-		auto SetFGColor(Color c);
-		auto SetBGColor(Color c);
+		auto& SetFGColor(color_t r, color_t g, color_t b);
+		auto& SetBGColor(color_t r, color_t g, color_t b);
+		auto& SetFGColor(Color c);
+		auto& SetBGColor(Color c);
 		
-		auto Reset() const;
-		auto Blink() const;
+		auto& Reset() ;
+		auto& Blink() ;
 
-		void Clear() const;
-		void Hide() const;
-		void Move(int x, int y) const;
+		auto&  Clear() ;
+		auto&  Hide() ;
+		auto&  Move(int x, int y) ;
 		
-		SKC_consoleVA void Ok(printType msg, printTypes ...msgs);
-		SKC_consoleVA void Okln(printType msg, printTypes ...msgs);
+		SKC_consoleVA auto&  Ok(printType msg, printTypes ...msgs);
+		SKC_consoleVA auto&  Okln(printType msg, printTypes ...msgs);
 		
-		SKC_consoleVA void Warn(printType msg, printTypes ...msgs);
-		SKC_consoleVA void Warnln (printType msg, printTypes ...msgs);
+		SKC_consoleVA auto&  Warn(printType msg, printTypes ...msgs);
+		SKC_consoleVA auto&  Warnln (printType msg, printTypes ...msgs);
 		
-		SKC_consoleVA void Print (printType msg1, printTypes... msg2);
-		SKC_consoleVA void Println(printType msg1, printTypes... msg2);
+		SKC_consoleVA auto&  Print (printType msg1, printTypes... msg2);
+		SKC_consoleVA auto&  Println(printType msg1, printTypes... msg2);
 		
-		SKC_consoleVA void Error(printType msg, printTypes ...msgs);
-		SKC_consoleVA void Errorln(printType msg, printTypes ...msgs);
+		SKC_consoleVA auto&  Error(printType msg, printTypes ...msgs);
+		SKC_consoleVA auto&  Errorln(printType msg, printTypes ...msgs);
 		
-		SKC_consoleVA void Inform(printType msg, printTypes ...msgs);
-		SKC_consoleVA void Informln(printType msg, printTypes ...msgs);
+		SKC_consoleVA auto&  Inform(printType msg, printTypes ...msgs);
+		SKC_consoleVA auto&  Informln(printType msg, printTypes ...msgs);
 		
-		SKC_consoleVA void ErrorAndDie(int exitcode, printType msg, printTypes ...msgs);
+		SKC_consoleVA auto&  ErrorAndDie(int exitcode, printType msg, printTypes ...msgs);
 	};
 	
-	auto Console::SetFGColor(color_t r, color_t g, color_t b)  {
+	auto& Console::SetFGColor(color_t r, color_t g, color_t b)  {
 		printf("%c[38;2;%d;%d;%dm", esc, r, g, b);
-		return "";
+		return *this;
 	}
-	auto Console::SetBGColor(color_t r, color_t g, color_t b)  {
+	auto& Console::SetBGColor(color_t r, color_t g, color_t b)  {
 		printf("%c[48;2;%d;%d;%dm", esc, r, g, b);
-		return "";
+		return *this; 
 	}
 	
-	auto Console::SetFGColor(Color c)  {
+	auto& Console::SetFGColor(Color c)  {
 		printf("%c[38;2;%d;%d;%dm", esc, c.r, c.g, c.b);
-		return "";
+		return *this;
 	}
-	auto Console::SetBGColor(Color c)  {
+	auto& Console::SetBGColor(Color c)  {
 		printf("%c[48;2;%d;%d;%dm", esc, c.r, c.g, c.b);
-		return "";
+		return *this;
 	}
 	
-	auto Console::Reset() const {
+	auto& Console::Reset() {
 		printf("%c[%cm", esc, 0);
-		return "";
+		return *this;
 	}
-	auto Console::Blink() const {
+	auto& Console::Blink() {
 		printf("%c[%dm", esc, 5);
-		return ""; 
+		return *this; 
 	}
-	void Console::Hide () const  {
+	
+	auto&  Console::Hide () {
 		printf("%c[%cm", esc,8);
+		return *this; 
 	}
-	void Console::Clear() const {
+	auto&  Console::Clear() {
 		printf("%cc",esc); 
+		return *this;
 	}
 
-	void Console::Move(int x, int y) const {
+	auto& Console::Move(int x, int y) {
 		printf("%c[%d;%dH", esc, x, y);
+		return *this;
 	}
 	
-	SKC_consoleVA void Console::Print(printType msg1, printTypes... msg2){
-		std::cout << msg1;
+	SKC_consoleVA auto&  Console::Print(printType msg1, printTypes... msg2){
+		using t = decltype(msg1); 
+		if constexpr (concepts::parsable_cimple<t>) { 
+			// if the type has a ToString method call it
+			// and the rest of the function doesn't even exist... 
+			std::cout << msg1.ToString();
+		}
+		else if constexpr (concepts::parsable_imple<t>) { 
+			//else if it has a toString method call that
+			std::cout << msg1.toString();
+		}
+		else {
+			std::cout << msg1; // do nothing 
+			
+			//this should only be called for integral, floating point; and [c]strings
+			//TODO make it so that any object that has an overloaded
+			//stream inserion operator can be called here... 
+		}
 		Print(msg2...);
+		return *this;
 	}
-	SKC_consoleVA void Console::Println(printType msg1, printTypes... msg2) {
+	SKC_consoleVA auto&  Console::Println(printType msg1, printTypes... msg2) {
 		Print(msg1, msg2..., '\n');
+		return *this;
 	}
 	
-	SKC_consoleVA void Console::Ok(printType msg1, printTypes... msg2) {
+	SKC_consoleVA auto&  Console::Ok(printType msg1, printTypes... msg2) {
 		SetBGColor(BG_pallet[ok]);
 		SetFGColor(FG_pallet[ok]);
 		Print(msg1, msg2...);
+		return *this;
+
 	}
-	SKC_consoleVA void Console::Inform(printType msg1, printTypes... msg2) {
+	SKC_consoleVA auto&  Console::Inform(printType msg1, printTypes... msg2) {
 		SetBGColor(this->BG_pallet[info]);
 		SetFGColor(this->FG_pallet[info]);
 		Print(msg1, msg2...);
+		return *this;
+
 	}
-	SKC_consoleVA void Console::Warn(printType msg1, printTypes... msg2) {
+	SKC_consoleVA auto&  Console::Warn(printType msg1, printTypes... msg2) {
 		SetBGColor(this->BG_pallet[warn]);
 		SetFGColor(this->FG_pallet[warn]);
 		Print(msg1, msg2...);
+		return *this;
+
 	}
-	SKC_consoleVA void Console::Error(printType msg1, printTypes... msg2) {
+	SKC_consoleVA auto&  Console::Error(printType msg1, printTypes... msg2) {
 		SetBGColor(this->BG_pallet[error]);
 		SetFGColor(this->FG_pallet[error]);
 		Print(msg1, msg2...);
+		return *this;
 	}
 
-	SKC_consoleVA void Console::Okln(printType msg1, printTypes... msg2)                       {
+	SKC_consoleVA auto&  Console::Okln(printType msg1, printTypes... msg2)                       {
 		Ok(msg1, msg2...);
 		Reset();
 		Print('\n');
+		return *this;
+
 	}
-	SKC_consoleVA void Console::Informln (printType msg1, printTypes... msg2)                  {
+	SKC_consoleVA auto&  Console::Informln (printType msg1, printTypes... msg2)                  {
 		Inform(msg1, msg2...);
 		Reset();
 		Print('\n');
+		return *this;
+
 	}
-	SKC_consoleVA void Console::Warnln(printType msg1, printTypes... msg2)                     {
+	SKC_consoleVA auto&  Console::Warnln(printType msg1, printTypes... msg2)                     {
 		Warn(msg1, msg2...);
 		Reset();
 		Print('\n');
+		return *this;
+
 	}
-	SKC_consoleVA void Console::Errorln(printType msg1, printTypes... msg2)                    {
+	SKC_consoleVA auto&  Console::Errorln(printType msg1, printTypes... msg2)                    {
 		Error(msg1, msg2...);
 		Reset();
 		Print('\n');
+		return *this;
+
 	}
-	SKC_consoleVA void Console::ErrorAndDie(int exitcode, printType msg1, printTypes... msg2)  {
+	SKC_consoleVA auto&  Console::ErrorAndDie(int exitcode, printType msg1, printTypes... msg2)  {
 		Error(msg1,msg2...);
 		Reset();
 		exit(exitcode);
+		return *this; 
 	}
 	
 }

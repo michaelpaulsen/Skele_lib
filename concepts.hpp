@@ -1,5 +1,5 @@
 #pragma once
-##include <concepts>
+#include <concepts>
 namespace SKC::concepts {
 	//typing concepts.
 	template <typename T> concept isNumber = std::is_integral_v<T> || std::is_floating_point_v<T>;
