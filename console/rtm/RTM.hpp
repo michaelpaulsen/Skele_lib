@@ -15,10 +15,10 @@ namespace SKC::Console::rtm {
 			functions.push_back(funct); 
 		 }
 		void operator () (size_t option) {
-			if (option > items.size()) {
+			if ((option-1) > items.size()) {
 				return;
 			}
-			functions[option](option); //this is lovely syntax... 
+			functions[option-1](option-1); //this is lovely syntax... 
 		}
 		std::string toString() {
 			auto ret = std::stringstream(); 
