@@ -13,7 +13,7 @@ namespace SKC::Console {
 		Color(color_t _r, color_t _g, color_t _b): r(_r),g(_g),b(_b) {}
 		Color(Color& c) : r(c.r), g(c.g), b(c.b){}
 		Color(Color&& c) = default; 
-		void operator =(Color c) {
+		void operator = (Color c) {
 			r = c.r;
 			b = c.b;
 			g = c.g;
@@ -80,11 +80,11 @@ namespace SKC::Console {
 		auto& SetFGColor(Color c);
 		auto& SetBGColor(Color c);
 		
-		auto& Reset() ;
-		auto& Blink() ;
+		auto& Reset();
+		auto& Blink();
 
-		auto&  Clear() ;
-		auto&  Hide() ;
+		auto&  Clear();
+		auto&  Hide();
 		auto&  Move(int x, int y) ;
 		
 		SKC_consoleVA auto&  Ok(printType msg, printTypes ...msgs);
