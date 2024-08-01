@@ -20,7 +20,7 @@ namespace SKC::Console {
 		
 		
 		
-
+		
 		auto& SetFGColor(color_t r, color_t g, color_t b);
 		auto& SetBGColor(color_t r, color_t g, color_t b);
 		auto& NoBlink() {
@@ -32,8 +32,11 @@ namespace SKC::Console {
 		auto& Clear();
 		auto& Hide();
 		auto& Move(int x, int y) ;
+		auto& Up() {
+			printf("\033[A");
+			return *this;
+		}
 		
-
 	
 		auto& Ok() { return *this; }
 		auto& Warn() { return *this; }
@@ -46,7 +49,7 @@ namespace SKC::Console {
 		auto& Errorln() { return *this; }
 		auto& Println() { return *this; }
 		auto& Informln() { return *this; }
-		
+
 		SKC_consoleVA auto&  Ok(printType msg, printTypes ...msgs);
 		SKC_consoleVA auto&  Okln(printType msg, printTypes ...msgs);
 		
