@@ -32,11 +32,26 @@ namespace SKC::Console {
 		auto& Clear();
 		auto& Hide();
 		auto& Move(int x, int y) ;
-		auto& Up() {
-			printf("\033[A");
+		auto& Up(int col = 1) {
+			printf("\033[%dA", col);
 			return *this;
 		}
-		
+		auto& Down(int col = 1) {
+			printf("\033[%dB", col);
+			return *this;
+		}
+		auto& Left(int col = 1) {
+			printf("\033[%dD", col);
+			return *this;
+		}
+		auto& Right(int col = 1) {
+			printf("\033[%dC", col);
+			return *this;
+		}
+		auto& ClearLine(int mode = 2) {
+			printf("\033[%dK", mode);
+			return *this;
+		}
 	
 		auto& Ok() { return *this; }
 		auto& Warn() { return *this; }
