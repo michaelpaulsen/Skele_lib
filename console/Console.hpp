@@ -23,6 +23,10 @@ namespace SKC::Console {
 
 		auto& SetFGColor(color_t r, color_t g, color_t b);
 		auto& SetBGColor(color_t r, color_t g, color_t b);
+		auto& NoBlink() {
+			printf("%c[%dm", esc, 25);
+			return *this;
+		}
 		auto& Blink();
 		auto& Reset();
 		auto& Clear();
