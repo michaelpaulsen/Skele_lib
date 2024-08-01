@@ -20,26 +20,28 @@ namespace SKC::Console {
 		
 		
 		
-		auto&       Ok() {return *this;}
-		auto&     Warn() {return *this;}
-		auto&     Okln() {return *this;}
-		auto&    Error() {return *this;}
-		auto&    Print() {return *this;}
-		auto&   Inform() {return *this;}
-		auto&   Warnln() {return *this;}
-		auto&  Errorln() {return *this;}
-		auto&  Println() {return *this;}
-		auto& Informln() {return *this;}
 
 		auto& SetFGColor(color_t r, color_t g, color_t b);
 		auto& SetBGColor(color_t r, color_t g, color_t b);
-		
-		auto& Reset();
 		auto& Blink();
+		auto& Reset();
+		auto& Clear();
+		auto& Hide();
+		auto& Move(int x, int y) ;
+		
 
-		auto&  Clear();
-		auto&  Hide();
-		auto&  Move(int x, int y) ;
+	
+		auto& Ok() { return *this; }
+		auto& Warn() { return *this; }
+		auto& Error() { return *this; }
+		auto& Print() { return *this; }
+		auto& Inform() { return *this; }
+
+		auto& Okln() { return *this; }
+		auto& Warnln() { return *this; }
+		auto& Errorln() { return *this; }
+		auto& Println() { return *this; }
+		auto& Informln() { return *this; }
 		
 		SKC_consoleVA auto&  Ok(printType msg, printTypes ...msgs);
 		SKC_consoleVA auto&  Okln(printType msg, printTypes ...msgs);
@@ -77,7 +79,6 @@ namespace SKC::Console {
 		printf("%c[%dm", esc, 5);
 		return *this; 
 	}
-	
 	auto&  Console::Hide () {
 		printf("%c[%cm", esc,8);
 		return *this; 
