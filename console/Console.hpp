@@ -6,56 +6,12 @@
 #define SKC_consoleVA template<concepts::printable printType, concepts::printable... printTypes>
 
 namespace SKC::Console {
-	typedef unsigned char color_t;
-	struct Color {
-		color_t r, g, b;
-		Color() : r(255), g(255), b(255){}
-		Color(color_t _r, color_t _g, color_t _b): r(_r),g(_g),b(_b) {}
-		Color(Color& c) : r(c.r), g(c.g), b(c.b){}
-		Color(Color&& c) = default; 
-		void operator = (Color c) {
-			r = c.r;
-			b = c.b;
-			g = c.g;
-		}
-		auto toString() {
-			std::stringstream str; 
-			str << '#'; 
-			if (r < 0x10) { str << '0'; }
-			str << std::hex << static_cast<int>(r);
-			if (g < 0x10) { str << '0'; }
-			str << std::hex << static_cast<int>(g);
-			if (b < 0x10) { str << '0'; }
-			str << std::hex << static_cast<int>(b);
-			return str.str();
-		}
-	};
 	class Console
 	{
+		using color_t = unsigned char;
 		static inline char esc = 27;
 	public:
-		enum color_name_t {
-			error,
-			warn,
-			ok,
-			info,
-			max
-		};
-		Color BG_pallet[color_name_t::max];
-		Color FG_pallet[color_name_t::max];
-
-
-		Console() {
-			BG_pallet[error] = { 255,100,100 };
-			BG_pallet[warn]  = { 193,156,  0 };
-			BG_pallet[ok]    = { 100,255,100 };
-			BG_pallet[info]  = { 100,100,255 };
-			
-			FG_pallet[error] = { 170,  0,  0};
-			FG_pallet[warn]  = { 170, 85, 00};
-			FG_pallet[ok]    = { 050,100,050};
-			FG_pallet[info]  = { 050,050,100};
-		};
+		Console() = default; 
 		~Console() = default;
 		Console(Console&) = delete; 
 		Console(Console&&) = delete; 
@@ -77,8 +33,6 @@ namespace SKC::Console {
 
 		auto& SetFGColor(color_t r, color_t g, color_t b);
 		auto& SetBGColor(color_t r, color_t g, color_t b);
-		auto& SetFGColor(Color c);
-		auto& SetBGColor(Color c);
 		
 		auto& Reset();
 		auto& Blink();
@@ -114,14 +68,6 @@ namespace SKC::Console {
 		return *this; 
 	}
 	
-	auto& Console::SetFGColor(Color c)  {
-		printf("%c[38;2;%d;%d;%dm", esc, c.r, c.g, c.b);
-		return *this;
-	}
-	auto& Console::SetBGColor(Color c)  {
-		printf("%c[48;2;%d;%d;%dm", esc, c.r, c.g, c.b);
-		return *this;
-	}
 	
 	auto& Console::Reset() {
 		printf("%c[%cm", esc, 0);
@@ -173,29 +119,28 @@ namespace SKC::Console {
 	}
 	
 	SKC_consoleVA auto&  Console::Ok(printType msg1, printTypes... msg2) {
-		SetBGColor(BG_pallet[ok]);
-		SetFGColor(FG_pallet[ok]);
+		SetBGColor(64,255,64);
+		SetFGColor(128,256,128);
 		Print(msg1, msg2...);
 		return *this;
 
 	}
 	SKC_consoleVA auto&  Console::Inform(printType msg1, printTypes... msg2) {
-		SetBGColor(this->BG_pallet[info]);
-		SetFGColor(this->FG_pallet[info]);
+		SetBGColor(64, 128, 128);
+		SetFGColor(128, 256, 256);
 		Print(msg1, msg2...);
 		return *this;
 
 	}
 	SKC_consoleVA auto&  Console::Warn(printType msg1, printTypes... msg2) {
-		SetBGColor(this->BG_pallet[warn]);
-		SetFGColor(this->FG_pallet[warn]);
+		SetBGColor(128, 128, 64);
+		SetFGColor( 256, 256, 128);
 		Print(msg1, msg2...);
 		return *this;
 
 	}
 	SKC_consoleVA auto&  Console::Error(printType msg1, printTypes... msg2) {
-		SetBGColor(this->BG_pallet[error]);
-		SetFGColor(this->FG_pallet[error]);
+		SetFGColor(255, 0, 0); 
 		Print(msg1, msg2...);
 		return *this;
 	}
