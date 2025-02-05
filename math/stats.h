@@ -1,4 +1,6 @@
 #include <cstdint>
+#pragma warn('use stats.hpp instead'); 
+
 ///converted from java script by Michael Paulsen 
 ///@author adamnovak
 ///see https://gist.github.com/adamnovak/f34e6cf2c08684752a9d
