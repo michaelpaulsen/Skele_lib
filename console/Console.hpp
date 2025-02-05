@@ -5,7 +5,7 @@
 #include "../concepts.hpp"
 #define SKC_consoleVA template<concepts::printable printType, concepts::printable... printTypes>
 
-namespace SKC::Console {
+namespace SKC{
 	class Console
 	{
 		using color_t = unsigned char;
