@@ -111,7 +111,7 @@ namespace SKC{
 	}
 
 	auto& Console::Move(int x, int y) {
-		printf("%c[%d;%dH", esc, x, y);
+		printf("%c[%d;%dH", esc, y, x);
 		return *this;
 	}
 	
